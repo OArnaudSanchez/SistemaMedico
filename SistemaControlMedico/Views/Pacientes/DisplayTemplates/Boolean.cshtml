@@ -1,0 +1,16 @@
+﻿@model Boolean 
+
+@*El nombre de la vista y el tipo de modelo deben ser el mismo
+    EN este caso como Nuestra vista se llama Boolean, el @model debe ser de tipo Boolean tambien.
+   Por lo que debemos ponerle como nombre a nuestra vista el tipo de dato que va a procesar *@
+
+@{ 
+    if (Model == true)//Como nuestro modelo es booleano debemos evaluarlo de forma booleana y ejecutar la logica que necesitemos.
+    {
+        <span>Si</span>
+    }
+    else
+    {
+        <span>No</span>
+    }
+}
