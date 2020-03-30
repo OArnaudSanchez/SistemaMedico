@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SistemaControlMedico.Models.Altas>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ingresos.idIngreso)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fechaSalida)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.monto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ingresos.idIngreso)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fechaSalida)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.monto)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idAlta }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idAlta }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idAlta })
+        </td>
+    </tr>
+}
+
+</table>

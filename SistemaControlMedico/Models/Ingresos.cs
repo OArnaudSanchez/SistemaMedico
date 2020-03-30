@@ -14,7 +14,7 @@ namespace SistemaControlMedico.Models
             Altas = new HashSet<Altas>();
         }
 
-        [Key]
+        [Key,Display(Name ="ID Ingreso")]
         public int idIngreso { get; set; }
 
         //[NotMapped]
