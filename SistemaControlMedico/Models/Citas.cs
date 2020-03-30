@@ -15,7 +15,7 @@ namespace SistemaControlMedico.Models
 
         public int medico { get; set; }
 
-        [Column(TypeName = "date")]
+        [Column(TypeName = "date"), Display(Name ="Fecha"),DataType(DataType.DateTime)]
         public DateTime fecha { get; set; }
 
         public virtual Medicos Medicos { get; set; }
