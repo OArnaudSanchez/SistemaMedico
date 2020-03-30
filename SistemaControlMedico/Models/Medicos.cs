@@ -18,7 +18,7 @@ namespace SistemaControlMedico.Models
         [Key]
         public int idMedico { get; set; }
 
-        [Required, Display(Name = "Nombre del Medico"), StringLength(50)]
+        [Required(ErrorMessage ="El campo {0} no puede estar Vacio"), Display(Name = "Nombre del Medico"), StringLength(50), DataType(DataType.Text,ErrorMessage ="Solo se permite texto")]
         public string nombre { get; set; }
 
         [Required,Display(Name = "Exequatur"), StringLength(200)]
