@@ -1,0 +1,51 @@
+﻿@model SistemaControlMedico.Models.Ingresos
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Ingresos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.Display("Tipo de Habitacion")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Habitaciones.tipo)
+        </dd>
+
+        <dt>
+            @Html.Display("Medico")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Medicos.nombre)
+        </dd>
+
+        <dt>
+            @Html.Display("Cedula Cliente")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pacientes.cedula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fechaIngreso)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fechaIngreso)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idIngreso }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
