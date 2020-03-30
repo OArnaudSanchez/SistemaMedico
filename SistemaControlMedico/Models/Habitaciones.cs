@@ -17,11 +17,13 @@ namespace SistemaControlMedico.Models
         [Key]
         public int idHabitacion { get; set; }
 
+        [Required(ErrorMessage ="Debe ingresar el Numero de Habitacion"),Display(Name ="Numero de Habitacion")]
         public int numero { get; set; }
 
-        [StringLength(1)]
+        [StringLength(25), Display(Name ="Tipo de Habitacion")]
         public string tipo { get; set; }
 
+        [Required(ErrorMessage ="Debe ingresar el Precio Por Dia"), Display(Name ="Precio Por Dia")]
         public int precioDia { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

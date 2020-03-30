@@ -37,6 +37,10 @@
             @Html.LabelFor(model => model.especialidad, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.especialidad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.especialidad,new SelectList(new[] { "ALERGOLOGIA","ANESTESIOLOGIA","CARDIOLOGIA","CIRUGIAS","DIAGNOSTICOS","ESTOMATOLOGIA",
+               "ENDOCRINOLOGIA","GASTROEnTEROLOGIA","GERIATRIA","GINECOLOGIA","HEMATOLOGIA","INFECTOLOGIA","NEFROLOGIA","NEUNOLOGIA","NEUROLOGIA","NUTRIOLOGIA",
+               "ODONTOLOGIA","OFTALMOLOGIA","ONCOLOGIA","OTORRINOLARINGOLOGIA","PEDIATRIA","PROCTOLOGIA","PSIQUIATRIA",
+               "REHABILITACION","REUMATOLOGIA","TRAUMATOLOGIA","TOXICOLOGIA","UROLOGIA"}), new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.especialidad, "", new { @class = "text-danger" })
             </div>
         </div>
