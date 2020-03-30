@@ -14,18 +14,17 @@ namespace SistemaControlMedico.Models
             Citas = new HashSet<Citas>();
             Ingresos = new HashSet<Ingresos>();
         }
-
+        string expresion = "402-3900892-9";
         [Key]
         public int idPaciente { get; set; }
 
-        [Required]
-        [StringLength(13)]
+        [Required(ErrorMessage ="El campo {0} No puede estar Vacio"), StringLength(13),Display(Name ="Cedula"),RegularExpression(@"\d{3}-\d{7}-\d{1}",ErrorMessage ="El campo {0} Debe tener el formato 000-0000000-0")]
         public string cedula { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required,StringLength(50),Display(Name ="Nombre")]
         public string nombre { get; set; }
 
+        [Required, Display(Name ="Paciente Asegurado")]
         public bool? asegurado { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

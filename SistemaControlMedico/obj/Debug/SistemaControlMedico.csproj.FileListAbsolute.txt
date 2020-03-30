@@ -76,4 +76,3 @@ C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\bin\es\Sy
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.csproj.CopyComplete
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.dll
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.pdb
-C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.csprojAssemblyReference.cache
