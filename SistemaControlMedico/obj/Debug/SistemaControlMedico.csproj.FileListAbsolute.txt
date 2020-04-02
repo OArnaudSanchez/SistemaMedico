@@ -77,3 +77,9 @@ C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.dll
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.pdb
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.csprojAssemblyReference.cache
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.PrimeraMigracion.resources
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.csproj.GenerateResource.cache
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.SegundaMigracion.resources
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.TerceraMigracion.resources
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.DatetimeMigration.resources
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.DatetimeMigration2.resources

@@ -9,7 +9,7 @@ namespace SistemaControlMedico.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(SistemaControlMedico.Models.SistemaMedicoDbContext context)

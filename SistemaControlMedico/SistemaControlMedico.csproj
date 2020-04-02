@@ -135,8 +135,29 @@
     <Compile Include="Controllers\Modulo Mantenimiento\MedicosController.cs" />
     <Compile Include="Controllers\Modulo Mantenimiento\PacientesController.cs" />
     <Compile Include="Controllers\Modulo Procesos\IngresosController.cs" />
+    <Compile Include="Controllers\PruebaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003302031245_PrimeraMigracion.cs" />
+    <Compile Include="Migrations\202003302031245_PrimeraMigracion.Designer.cs">
+      <DependentUpon>202003302031245_PrimeraMigracion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003302043168_SegundaMigracion.cs" />
+    <Compile Include="Migrations\202003302043168_SegundaMigracion.Designer.cs">
+      <DependentUpon>202003302043168_SegundaMigracion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003312134014_TerceraMigracion.cs" />
+    <Compile Include="Migrations\202003312134014_TerceraMigracion.Designer.cs">
+      <DependentUpon>202003312134014_TerceraMigracion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004012332187_DatetimeMigration.cs" />
+    <Compile Include="Migrations\202004012332187_DatetimeMigration.Designer.cs">
+      <DependentUpon>202004012332187_DatetimeMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004012350023_DatetimeMigration2.cs" />
+    <Compile Include="Migrations\202004012350023_DatetimeMigration2.Designer.cs">
+      <DependentUpon>202004012350023_DatetimeMigration2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Altas.cs" />
@@ -172,6 +193,8 @@
     <Content Include="Views\Altas\Details.cshtml" />
     <Content Include="Views\Altas\Edit.cshtml" />
     <Content Include="Views\Altas\Index.cshtml" />
+    <Content Include="Views\Altas\Datos.cshtml" />
+    <Content Include="Views\Prueba\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -181,6 +204,23 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003302031245_PrimeraMigracion.resx">
+      <DependentUpon>202003302031245_PrimeraMigracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003302043168_SegundaMigracion.resx">
+      <DependentUpon>202003302043168_SegundaMigracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003312134014_TerceraMigracion.resx">
+      <DependentUpon>202003312134014_TerceraMigracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004012332187_DatetimeMigration.resx">
+      <DependentUpon>202004012332187_DatetimeMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004012350023_DatetimeMigration2.resx">
+      <DependentUpon>202004012350023_DatetimeMigration2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

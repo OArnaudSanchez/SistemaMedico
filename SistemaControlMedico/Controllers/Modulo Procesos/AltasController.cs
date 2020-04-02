@@ -13,7 +13,7 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
     public class AltasController : Controller
     {
         private SistemaMedicoDbContext db = new SistemaMedicoDbContext();
-
+        
         // GET: Altas
         public ActionResult Index()
         {
@@ -36,13 +36,30 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
             return View(altas);
         }
 
+       
+
         // GET: Altas/Create
         public ActionResult Create()
         {
+
             Altas altas = new Altas();
+
             ViewBag.ingreso = new SelectList(db.Ingresos, "idIngreso", "idIngreso");
-            ViewBag.monto = altas.CalcularMonto();
-            return View();
+
+            return View(altas);
+        }
+
+        public JsonResult ObtenerRegistros(int code)
+        {
+            SistemaMedicoDbContext db = new SistemaMedicoDbContext();
+
+            var lst = (from i in db.Ingresos
+                       join h in db.Habitaciones on i.habitacion equals h.idHabitacion
+                       join p in db.Pacientes on i.paciente equals p.idPaciente
+                       where i.idIngreso == code
+                       select new { nom = p.nombre, fe = i.fechaIngreso, hab = h.tipo, ing = i.idIngreso,
+                           ced =p.cedula, med=i.Medicos.nombre });
+            return Json(lst, JsonRequestBehavior.AllowGet);
         }
 
         // POST: Altas/Create

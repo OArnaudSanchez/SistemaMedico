@@ -26,7 +26,17 @@ namespace SistemaControlMedico.Models
         [Required(ErrorMessage ="Debe ingresar el Precio Por Dia"), Display(Name ="Precio Por Dia")]
         public int precioDia { get; set; }
 
+
+        //[Required,Display(Name ="Fecha de Ingreso"),DataType(DataType.DateTime)]
+        //public DateTime fechaIngreso { get; set; }
+
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ingresos> Ingresos { get; set; }
+    }
+
+    public enum PrecioHabitacion
+    {
+        Doble = 5000, Privada = 1000 , Suite = 15000
     }
 }

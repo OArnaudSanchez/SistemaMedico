@@ -21,7 +21,7 @@
         <th>
             @Html.DisplayNameFor(model => model.precioDia)
         </th>
-        <th></th>
+      
     </tr>
 
 @foreach (var item in Model) {
@@ -35,10 +35,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.precioDia)
         </td>
+       
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idHabitacion }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idHabitacion }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idHabitacion })
+            @Html.ActionLink("Edit", "Edit", new { id = item.idHabitacion }) |
+            @Html.ActionLink("Details", "Details", new { id = item.idHabitacion }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.idHabitacion })
         </td>
     </tr>
 }

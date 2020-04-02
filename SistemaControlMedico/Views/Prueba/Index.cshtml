@@ -1,0 +1,45 @@
+﻿@model List<SistemaControlMedico.Models.Ingresos>
+
+<input onclick="Obten();" type="button" value="Obtener">
+
+<input id="nombreP" name="nombreP" type="text" />
+<input id="fechaI" type="text" />
+<input id="tipoH" type="text" />
+<input id="idI" type="text" />
+
+<div id="datos">
+
+</div>
+
+
+<script>
+    function Obten(){
+        fetch("@Url.Content("~/Prueba/ObtenerRegistros")")
+            .then(function (res) {
+                return res.json();
+
+            }).then(function (resultado) {
+                let Nombre = "";
+                let fecha = "";
+                let tipoo = "";
+                let id = "";
+                for (let i = 0; i < resultado.length; i++) {
+                    Nombre += resultado[i].nom;
+                    fecha += resultado[i].fe;
+                    tipoo += resultado[i].hab;
+                    id += resultado[i].ing;
+                }
+                $("#nombreP").val(Nombre);
+                $("#fechaI").val(fecha);
+                $("#tipoH").val(tipoo);
+                $("#idI").val(id);
+                
+                
+                document.getElementById("datos").innerHTML = Nombre+' '+fecha+' '+tipoo+' '+id;
+
+
+            });
+    }
+</script>
+
+

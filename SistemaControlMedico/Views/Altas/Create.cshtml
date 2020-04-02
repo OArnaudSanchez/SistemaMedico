@@ -7,47 +7,246 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+
+@using (Html.BeginForm())
 {
+
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Altas</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ingreso, "ID Del Ingreso", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("ingreso", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ingreso, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.fechaSalida, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fechaSalida, new { htmlAttributes = new {@type="date" ,@class = "form-control datepicker" } })
-                @Html.ValidationMessageFor(model => model.fechaSalida, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-
-                @Html.EditorFor(model => model.monto, new { htmlAttributes = new {@readonly="readonly" ,@class = "form-control",@Value = Model.CalcularMonto().ToString() } })
-                @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    <h4>Altas</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.ingreso, "ID Ingreso", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(Model => Model.ingreso, ViewBag.ingreso as SelectList, "Seleccione el ID del Ingreso", htmlAttributes: new { onChange = "TextoSeleccionado(this.value);", @id = "opciones", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ingreso, "", new { @class = "text-danger" })
         </div>
     </div>
-}
 
+    <div class="form-group">
+        @Html.LabelFor(model => model.nombreP, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nombreP, new { htmlAttributes = new { @id = "nombreP", @readonly = "readonly", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.nombreP, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.cedulaP, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.cedulaP, new { htmlAttributes = new { @id = "cedulaP", @readonly = "readonly", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cedulaP, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.nombreM, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nombreM, new { htmlAttributes = new { @id = "nombreM", @readonly = "readonly", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.nombreM, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.tipoH, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.tipoH, new { htmlAttributes = new { @id = "tipoH", @readonly = "readonly", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.tipoH, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.fechaI, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.fechaI, new { htmlAttributes = new { @id = "fechaI", @readonly = "readonly", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.fechaI, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.fechaSalida, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.fechaSalida, new { htmlAttributes = new { @id = "fechaSalida",@type="date",@class ="form-control" } })
+            @Html.ValidationMessageFor(model => model.fechaSalida, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.monto, new { htmlAttributes = new { @id = "monto", @readonly = "readonly", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function TextoSeleccionado(code) {
+        $.ajax({
+            url: '@Url.Action("ObtenerRegistros","Altas")',
+            type: 'POST',
+            data: { "code": code },
+            success: function (data) {
+               
+                if (data != null) {
+                    let Nombre = "";
+                    let fecha = "";
+                    let tipoo = "";
+                    let cedula = "";
+                    let medico = "";
+                    for (let i = 0; i < data.length; i++) {
+                       
+                        Nombre += data[i].nom;
+                        fecha += data[i].fe;
+                        tipoo += data[i].hab;
+                        cedula += data[i].ced;
+                        medico += data[i].med;
+                    }
+                    
+                    $("#nombreP").val(Nombre);
+                    $("#fechaI").val(fecha);
+                    $("#tipoH").val(tipoo);
+                    $("#cedulaP").val(cedula);
+                    $("#nombreM").val(medico);
+                    console.log(Nombre);
+                    console.log(fecha);
+                    console.log(tipoo);
+                    document.getElementById("ejemplo").innerHTML = Nombre;
+                }
+            }
+        });
+    }
+
+
+    
+    @*function TextoSeleccionado(ddlitem) {
+        var selValue = ddlitem.value;
+        var selText = ddlitem.options[ddlitem.selectedIndex].innerHTML;
+
+
+        fetch("@Url.Content("~/Altas/ObtenerRegistros")")
+            .then(function (respuesta) {
+                return respuesta.json();
+            })
+            .then(function (miRespuesta) {
+                let Nombre = "";
+                let fecha = "";
+                let tipoo = "";
+
+                for (let i = 0; i < resultado.length; i++) {
+                    Nombre += resultado[i].nom;
+                    fecha += resultado[i].fe;
+                    tipoo += resultado[i].hab;
+                    id += resultado[i].ing;
+                }
+                $("#nombreP").val(Nombre);
+                $("#fechaI").val(fecha);
+                $("#tipoH").val(tipoo);
+                $("#idI").val(id);
+            });
+
+        //$('#paciente').val(selText);
+
+    }*@
+
+     @*function Obten(){
+        fetch("@Url.Content("~/Altas/ObtenerRegistros")")
+            .then(function (res) {
+                return res.json();
+
+            }).then(function (resultado) {
+                let Nombre = "";
+                let fecha = "";
+                let tipoo = "";
+                let id = "";
+                for (let i = 0; i < resultado.length; i++) {
+                    Nombre += resultado[i].nom;
+                    fecha += resultado[i].fe;
+                    tipoo += resultado[i].hab;
+                    id += resultado[i].ing;
+                }
+                $("#nombreP").val(Nombre);
+                $("#fechaI").val(fecha);
+                $("#tipoH").val(tipoo);
+                $("#idI").val(id);
+                
+                
+                document.getElementById("datos").innerHTML = Nombre+' '+fecha+' '+tipoo+' '+id;
+
+
+            });
+    }
+
+    $(document).ready(function () {
+        $('#ingreso').change(function () {
+            $.ajax({
+                type: "post",
+                url: "/Altas/Datos",
+                data: { stateId: $('#ingreso').val() },
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    var paciente = "<select id='paciente'>";
+                    paciente = paciente + '<option value="">--Selecione el Paciente--</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        paciente = paciente + '<option value=' + data[i].nombre + '>' + data[i].idPaciente + '</option>';
+                    }
+                    paciente = paciente + '</select>';
+                    $('#paciente').html(district);
+                }
+            });
+        });
+    });*@
+
+    //$(document).ready(function () {
+
+    //    $('#ingreso').change(function () {
+
+    //        $.get("/Altas/Datos", { ingreso: $('#ingreso').val() }, function (data) {
+    //            $("#paciente").empty()
+    //            $.each(data, function (index, row) {
+    //                $("#paciente").append("<option value='" + row.nombre + "'>" + row.tipo+"</option>")
+    //            });
+    //        });
+    //    });
+    //});
+
+    //$(document).ready(function () {
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Altas/Datos",
+    //        data: "{}",
+    //        success: function (data) {
+    //            var s = '<option value="-1">Seleccione el Ingreso</option>';
+    //            for (var i = 0; i < data.length; i++) {
+    //                s += '<option value="' + data[i].fechaIngreso + '"> ' + data[i].nombre + data[i].tipo + '</option >;
+    //            }
+    //            $("#opciones").html(s);
+    //        }
+    //    });
+    //});
+    function getValue() {
+        var valor = $("fechaSalida").val;
+        $("#text").val(valor);
+    }
+
+
+</script>

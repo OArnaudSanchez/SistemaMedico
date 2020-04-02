@@ -29,7 +29,7 @@ namespace SistemaControlMedico.Models
         [Required(ErrorMessage = "Debe seleccionar el Medico responsable del Ingreso")]
         public int medico { get; set; }
 
-        [Column(TypeName = "date"), DataType(DataType.Date),Display(Name ="Fecha de Ingreso"),Required(ErrorMessage ="El campo {0} No puede estar Vacio")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true), Display(Name ="Fecha de Ingreso"),Required(ErrorMessage ="El campo {0} No puede estar Vacio")]
         public DateTime fechaIngreso { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
