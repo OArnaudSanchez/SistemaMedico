@@ -14,16 +14,13 @@ namespace SistemaControlMedico.Models
         [Display(Name ="Seleccione el Ingreso"), Required(ErrorMessage ="El campo {0} no puede estar vacio")]
         public int ingreso { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true), Display(Name = "Fecha de Salida"), Required(ErrorMessage ="Debe seleccionar la fecha de salida")]
-        public DateTime? fechaSalida { get; set; }
+        [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}", ApplyFormatInEditMode =true), Display(Name = "Fecha de Salida"), Required(ErrorMessage ="Debe seleccionar la fecha de salida")]
+        public DateTime fechaSalida { get; set; }
 
         [Display(Name = "Monto"), Required(ErrorMessage ="Para calcular el Monto debe seleccionar una fecha de salida")]
         public int monto { get; set; }
 
-        [NotMapped]
-        public int valor { get; set; }
-
-        [NotMapped,Display(Name ="Fecha de Ingreso")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true),NotMapped,Display(Name ="Fecha de Ingreso")]
         public DateTime fechaI { get; set; }
 
         [NotMapped, Display(Name ="Tipo de Habitacion")]
@@ -40,10 +37,72 @@ namespace SistemaControlMedico.Models
 
         public virtual Ingresos Ingresos { get; set; }
 
-        public int CalcularMonto(int tipoHabitacion, int cantidadDias)
+        public Altas()
         {
-            return tipoHabitacion * cantidadDias;
+            
         }
-                     
+
+        public int TrabajoFechas(string tipoH, DateTime inicio, DateTime fin)
+        {
+            TimeSpan ts = fin - inicio;
+            int parametro = ts.Days;
+
+            if (parametro > 0 && parametro <= 31)
+            {
+                //años
+                if (tipoH == "DOBLE")
+                {
+                    return monto = parametro * 500;
+                }
+                else if (tipoH == "PRIVADA")
+                {
+                    return monto = parametro * 1000;
+                }
+                else
+                {
+                    return monto = parametro * 2000;
+                }
+                
+            }
+
+           else if (parametro > 31 && parametro < 365)
+            {
+                //Meses
+                if (tipoH == "DOBLE")
+                {
+                    return monto = parametro * 500;
+                }
+                else if (tipoH == "PRIVADA")
+                {
+                    return monto = parametro * 1000;
+                }
+                else
+                {
+                    return monto = parametro * 2000;
+                }
+            }
+
+           else if(parametro > 365)
+            {
+                //Años
+                if (tipoH == "DOBLE")
+                {
+                    return monto = parametro * 500;
+                }
+                else if (tipoH == "PRIVADA")
+                {
+                    return monto = parametro * 1000;
+                }
+                else
+                {
+                    return monto = parametro * 2000;
+                }
+            }
+            else
+            {
+                return 00;
+            }
+           
+        }
     }
 }

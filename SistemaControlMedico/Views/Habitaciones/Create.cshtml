@@ -34,7 +34,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.precioDia, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.precioDia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(model => model.precioDia,new SelectList(new[] {500,1000,2000 }), new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.precioDia, "", new { @class = "text-danger" })
         </div>
 

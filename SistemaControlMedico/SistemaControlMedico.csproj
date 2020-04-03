@@ -159,6 +159,10 @@
     <Compile Include="Migrations\202004012350023_DatetimeMigration2.Designer.cs">
       <DependentUpon>202004012350023_DatetimeMigration2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004030021479_Ejemplo.cs" />
+    <Compile Include="Migrations\202004030021479_Ejemplo.Designer.cs">
+      <DependentUpon>202004030021479_Ejemplo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Altas.cs" />
     <Compile Include="Models\Citas.cs" />
@@ -220,6 +224,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004012350023_DatetimeMigration2.resx">
       <DependentUpon>202004012350023_DatetimeMigration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004030021479_Ejemplo.resx">
+      <DependentUpon>202004030021479_Ejemplo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

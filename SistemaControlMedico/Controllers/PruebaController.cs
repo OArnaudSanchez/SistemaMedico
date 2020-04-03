@@ -29,7 +29,8 @@ namespace SistemaControlMedico.Controllers
                          join h in db.Habitaciones on i.habitacion equals h.idHabitacion
                          join p in db.Pacientes on i.paciente equals p.idPaciente
                          where i.idIngreso == 0
-                         select new {nom= p.nombre,fe = i.fechaIngreso,hab = h.tipo,ing = i.idIngreso});
+                         select new {nom= p.nombre,fe = i.fechaIngreso,hab = h.tipo,ing = i.idIngreso}).ToList();
+            
             return Json(lst, JsonRequestBehavior.AllowGet);
         }
     }
