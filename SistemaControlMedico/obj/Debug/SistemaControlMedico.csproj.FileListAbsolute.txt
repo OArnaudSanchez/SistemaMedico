@@ -83,3 +83,4 @@ C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.TerceraMigracion.resources
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.DatetimeMigration.resources
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.DatetimeMigration2.resources
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.Ejemplo.resources

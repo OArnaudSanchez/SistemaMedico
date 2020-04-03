@@ -61,7 +61,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.fechaI, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.fechaI, new { htmlAttributes = new { @id = "fechaI", @readonly = "readonly", @class = "form-control" } })
+            @Html.EditorFor(model => model.fechaI, new { htmlAttributes = new { @id = "fechaI", @readonly = "readonly",@class = "form-control" } })
             @Html.ValidationMessageFor(model => model.fechaI, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -76,15 +76,8 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.monto, new { htmlAttributes = new { @id = "monto", @readonly = "readonly", @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
+
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
@@ -112,6 +105,7 @@
                     let tipoo = "";
                     let cedula = "";
                     let medico = "";
+
                     for (let i = 0; i < data.length; i++) {
                        
                         Nombre += data[i].nom;
@@ -120,133 +114,25 @@
                         cedula += data[i].ced;
                         medico += data[i].med;
                     }
-                    
+
+                    var dateString = fecha.substr(6);
+                    var currentTime = new Date(parseInt(dateString));
+                    var month = currentTime.getMonth() + 1;
+                    var day = currentTime.getDate();
+                    var year = currentTime.getFullYear();
+                    var date = day + "/" + month + "/" + year;
+
+
                     $("#nombreP").val(Nombre);
-                    $("#fechaI").val(fecha);
+                    $("#fechaI").val(date);
                     $("#tipoH").val(tipoo);
                     $("#cedulaP").val(cedula);
                     $("#nombreM").val(medico);
-                    console.log(Nombre);
-                    console.log(fecha);
-                    console.log(tipoo);
-                    document.getElementById("ejemplo").innerHTML = Nombre;
+
+                    
+
                 }
             }
         });
     }
-
-
-    
-    @*function TextoSeleccionado(ddlitem) {
-        var selValue = ddlitem.value;
-        var selText = ddlitem.options[ddlitem.selectedIndex].innerHTML;
-
-
-        fetch("@Url.Content("~/Altas/ObtenerRegistros")")
-            .then(function (respuesta) {
-                return respuesta.json();
-            })
-            .then(function (miRespuesta) {
-                let Nombre = "";
-                let fecha = "";
-                let tipoo = "";
-
-                for (let i = 0; i < resultado.length; i++) {
-                    Nombre += resultado[i].nom;
-                    fecha += resultado[i].fe;
-                    tipoo += resultado[i].hab;
-                    id += resultado[i].ing;
-                }
-                $("#nombreP").val(Nombre);
-                $("#fechaI").val(fecha);
-                $("#tipoH").val(tipoo);
-                $("#idI").val(id);
-            });
-
-        //$('#paciente').val(selText);
-
-    }*@
-
-     @*function Obten(){
-        fetch("@Url.Content("~/Altas/ObtenerRegistros")")
-            .then(function (res) {
-                return res.json();
-
-            }).then(function (resultado) {
-                let Nombre = "";
-                let fecha = "";
-                let tipoo = "";
-                let id = "";
-                for (let i = 0; i < resultado.length; i++) {
-                    Nombre += resultado[i].nom;
-                    fecha += resultado[i].fe;
-                    tipoo += resultado[i].hab;
-                    id += resultado[i].ing;
-                }
-                $("#nombreP").val(Nombre);
-                $("#fechaI").val(fecha);
-                $("#tipoH").val(tipoo);
-                $("#idI").val(id);
-                
-                
-                document.getElementById("datos").innerHTML = Nombre+' '+fecha+' '+tipoo+' '+id;
-
-
-            });
-    }
-
-    $(document).ready(function () {
-        $('#ingreso').change(function () {
-            $.ajax({
-                type: "post",
-                url: "/Altas/Datos",
-                data: { stateId: $('#ingreso').val() },
-                datatype: "json",
-                traditional: true,
-                success: function (data) {
-                    var paciente = "<select id='paciente'>";
-                    paciente = paciente + '<option value="">--Selecione el Paciente--</option>';
-                    for (var i = 0; i < data.length; i++) {
-                        paciente = paciente + '<option value=' + data[i].nombre + '>' + data[i].idPaciente + '</option>';
-                    }
-                    paciente = paciente + '</select>';
-                    $('#paciente').html(district);
-                }
-            });
-        });
-    });*@
-
-    //$(document).ready(function () {
-
-    //    $('#ingreso').change(function () {
-
-    //        $.get("/Altas/Datos", { ingreso: $('#ingreso').val() }, function (data) {
-    //            $("#paciente").empty()
-    //            $.each(data, function (index, row) {
-    //                $("#paciente").append("<option value='" + row.nombre + "'>" + row.tipo+"</option>")
-    //            });
-    //        });
-    //    });
-    //});
-
-    //$(document).ready(function () {
-    //    $.ajax({
-    //        type: "POST",
-    //        url: "/Altas/Datos",
-    //        data: "{}",
-    //        success: function (data) {
-    //            var s = '<option value="-1">Seleccione el Ingreso</option>';
-    //            for (var i = 0; i < data.length; i++) {
-    //                s += '<option value="' + data[i].fechaIngreso + '"> ' + data[i].nombre + data[i].tipo + '</option >;
-    //            }
-    //            $("#opciones").html(s);
-    //        }
-    //    });
-    //});
-    function getValue() {
-        var valor = $("fechaSalida").val;
-        $("#text").val(valor);
-    }
-
-
 </script>

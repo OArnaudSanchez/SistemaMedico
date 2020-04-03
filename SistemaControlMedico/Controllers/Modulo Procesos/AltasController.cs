@@ -67,12 +67,19 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idAlta,ingreso,fechaSalida,monto")] Altas altas)
+        public ActionResult Create([Bind(Include = "idAlta,ingreso,fechaI,fechaSalida,monto")] Altas altas)
         {
             if (ModelState.IsValid)
             {
+                string habitacion = altas.tipoH;
+                DateTime inicio = altas.fechaI;
+                DateTime fin = altas.fechaSalida;
+
+                altas.TrabajoFechas(habitacion,inicio,fin);
+
                 db.Altas.Add(altas);
                 db.SaveChanges();
+               
                 return RedirectToAction("Index");
             }
 
