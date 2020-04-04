@@ -21,6 +21,27 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
             return View(ingresos.ToList());
         }
 
+        [HttpPost]
+        public ActionResult Index(string busqueda)
+        {
+            if (busqueda == string.Empty)
+            {
+                var ingresos = db.Ingresos.Include(i => i.Habitaciones)
+                    .Include(i => i.Medicos).Include(i => i.Pacientes);
+                return View(ingresos.ToList());
+            }
+            else
+            {
+                var consulta = from i in db.Ingresos
+                               join h in db.Habitaciones on i.habitacion equals h.idHabitacion
+                               where i.fechaIngreso.ToString().Contains(busqueda) || h.tipo.Contains(busqueda)
+                               select i;
+
+
+                return View(consulta);
+            }
+        }
+
         // GET: Ingresos/Details/5
         public ActionResult Details(int? id)
         {

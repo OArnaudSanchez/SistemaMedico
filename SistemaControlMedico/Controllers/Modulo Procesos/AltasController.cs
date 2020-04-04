@@ -21,6 +21,32 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
             return View(altas.ToList());
         }
 
+        [HttpPost]
+        public ActionResult Index(string busqueda, string opcion)
+        {
+            if (busqueda == string.Empty)
+            {
+                var altas = db.Altas.Include(a => a.Ingresos);
+                return View(altas.ToList());
+            }
+            else
+            {
+                var consulta = from a in db.Altas
+                               join p in db.Pacientes on a.Ingresos.paciente equals p.idPaciente
+                               join i in db.Ingresos on a.ingreso equals i.idIngreso
+                               where p.nombre.Contains(busqueda) || i.fechaIngreso.ToString().Contains(busqueda) || a.fechaSalida.ToString().Contains(busqueda)
+                               select a;
+
+                if(opcion == "count") ViewBag.conteo = consulta.Count();
+                //if (opcion == "sum") ViewBag.suma = consulta.Sum();
+                //if (opcion == "avg") ViewBag.promedio = consulta.Average();
+                //if (opcion == "max") ViewBag.mayor = consulta.Max();
+                //if(opcion == "min") ViewBag.menor = consulta.Min();
+
+                return View(consulta);
+            }
+        }
+
         // GET: Altas/Details/5
         public ActionResult Details(int? id)
         {

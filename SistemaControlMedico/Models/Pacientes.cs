@@ -24,8 +24,8 @@ namespace SistemaControlMedico.Models
         [Required(ErrorMessage ="El campo {0} No puede estar Vacio"),StringLength(50),Display(Name ="Nombre"), DataType(DataType.Text, ErrorMessage ="Solo se permiten Letras")]
         public string nombre { get; set; }
 
-        [Required, Display(Name ="Paciente Asegurado")]
-        public bool? asegurado { get; set; }
+        [Required, Display(Name ="Paciente Asegurado"), StringLength(2)]
+        public string asegurado { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Citas> Citas { get; set; }

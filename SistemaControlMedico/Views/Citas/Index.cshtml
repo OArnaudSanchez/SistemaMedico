@@ -7,6 +7,15 @@
 
 <h2>Index</h2>
 
+<button>Imprimir</button>
+
+<form action="Citas" , method="post">
+    <input type="text" name="busqueda" placeholder="Ingrese la fecha, doctor o paciente">
+    <input type="submit" value="BUSCAR">
+    <input type="submit" value="LIMPIAR">
+</form>
+
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -19,12 +28,16 @@
             @Html.DisplayNameFor(model => model.Pacientes.cedula)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Pacientes.nombre)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.fecha)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Medicos.nombre)
@@ -33,14 +46,17 @@
             @Html.DisplayFor(modelItem => item.Pacientes.cedula)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Pacientes.nombre)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.fecha)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idCita }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idCita }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idCita })
+            @Html.ActionLink("Edit", "Edit", new { id = item.idCita }) |
+            @Html.ActionLink("Details", "Details", new { id = item.idCita }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.idCita })
         </td>
     </tr>
-}
+    }
 
 </table>

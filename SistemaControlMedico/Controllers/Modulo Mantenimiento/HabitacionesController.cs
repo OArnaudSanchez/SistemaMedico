@@ -20,6 +20,22 @@ namespace SistemaControlMedico.Controllers
             return View(db.Habitaciones.ToList());
         }
 
+        [HttpPost]
+        public ActionResult Index(string busqueda,string opcion)
+        {
+            if (busqueda == string.Empty)
+                return View(db.Habitaciones.ToList());
+            else
+            {
+                    var consulta = (from h in db.Habitaciones
+                                   where h.tipo.Contains(busqueda)
+                                   select h);
+                return View(consulta);
+               
+            }
+
+        }
+
         // GET: Habitaciones/Details/5
         public ActionResult Details(int? id)
         {

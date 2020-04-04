@@ -1,11 +1,23 @@
 ﻿@model IEnumerable<SistemaControlMedico.Models.Habitaciones>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "Index";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
+
+<button>Imprimir</button>
+
+<form action="Habitaciones" , method="post">
+    <input type="text" name="busqueda" placeholder="Ingrese el tipo de habitacion">
+
+    <input type="submit" value="BUSCAR">
+    <input type="submit" value="LIMPIAR">
+</form>
+
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -21,27 +33,28 @@
         <th>
             @Html.DisplayNameFor(model => model.precioDia)
         </th>
-      
+
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.numero)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tipo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.precioDia)
-        </td>
-       
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.idHabitacion }) |
-            @Html.ActionLink("Details", "Details", new { id = item.idHabitacion }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.idHabitacion })
-        </td>
-    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.numero)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tipo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.precioDia)
+    </td>
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.idHabitacion }) |
+        @Html.ActionLink("Details", "Details", new { id = item.idHabitacion }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.idHabitacion })
+    </td>
+</tr>
 }
 
 </table>

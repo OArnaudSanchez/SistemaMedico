@@ -21,6 +21,28 @@ namespace SistemaControlMedico.Controllers
             return View(citas.ToList());
         }
 
+        [HttpPost]
+        public ActionResult Index(string busqueda)
+        {
+            if (busqueda == string.Empty)
+            {
+                var citas = db.Citas.Include(c => c.Medicos).Include(c => c.Pacientes);
+                return View(citas.ToList());
+            }
+            else
+            {
+                var consulta = from c in db.Citas
+                               join m in db.Medicos on c.medico equals m.idMedico
+                               join p in db.Pacientes on c.paciente equals p.idPaciente
+                               where c.fecha.ToString().Contains(busqueda) || m.nombre.Contains(busqueda) 
+                               || p.nombre.Contains(busqueda)
+                               select c;
+
+
+                return View(consulta);
+            }
+        }
+
         // GET: Citas/Details/5
         public ActionResult Details(int? id)
         {

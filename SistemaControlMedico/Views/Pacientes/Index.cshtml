@@ -7,6 +7,22 @@
 
 <h2>Index</h2>
 
+<button>Imprimir</button>
+
+
+<form action="Pacientes" , method="post">
+    <select name="busqueda">
+        <option value="" selected>Seleccione el Filtro</option>
+        <option value="SI">Asegurado</option>
+        <option value="NO">No Asegurado</option>
+    </select>
+
+    <input type="text" name="texto" placeholder="Ingrese el Nombre o Cedula del Paciente">
+
+    <input type="submit" value="BUSCAR">
+    <input type="submit" value="LIMPIAR">
+</form>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
@@ -24,23 +40,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.cedula)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.asegurado)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idPaciente }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idPaciente }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idPaciente })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.asegurado)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.idPaciente }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idPaciente }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idPaciente })
+            </td>
+        </tr>
+    }
 
 </table>

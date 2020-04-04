@@ -135,7 +135,6 @@
     <Compile Include="Controllers\Modulo Mantenimiento\MedicosController.cs" />
     <Compile Include="Controllers\Modulo Mantenimiento\PacientesController.cs" />
     <Compile Include="Controllers\Modulo Procesos\IngresosController.cs" />
-    <Compile Include="Controllers\PruebaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -162,6 +161,18 @@
     <Compile Include="Migrations\202004030021479_Ejemplo.cs" />
     <Compile Include="Migrations\202004030021479_Ejemplo.Designer.cs">
       <DependentUpon>202004030021479_Ejemplo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004032256189_CambiandoDatos.cs" />
+    <Compile Include="Migrations\202004032256189_CambiandoDatos.Designer.cs">
+      <DependentUpon>202004032256189_CambiandoDatos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004032258085_CambiandoDatoss.cs" />
+    <Compile Include="Migrations\202004032258085_CambiandoDatoss.Designer.cs">
+      <DependentUpon>202004032258085_CambiandoDatoss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004032329552_Prueba.cs" />
+    <Compile Include="Migrations\202004032329552_Prueba.Designer.cs">
+      <DependentUpon>202004032329552_Prueba.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Altas.cs" />
@@ -227,6 +238,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004030021479_Ejemplo.resx">
       <DependentUpon>202004030021479_Ejemplo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004032256189_CambiandoDatos.resx">
+      <DependentUpon>202004032256189_CambiandoDatos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004032258085_CambiandoDatoss.resx">
+      <DependentUpon>202004032258085_CambiandoDatoss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004032329552_Prueba.resx">
+      <DependentUpon>202004032329552_Prueba.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

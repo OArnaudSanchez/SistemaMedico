@@ -20,6 +20,35 @@ namespace SistemaControlMedico.Controllers
             return View(db.Pacientes.ToList());
         }
 
+        [HttpPost]
+        public ActionResult Index(string busqueda, string texto,string opcion)
+        {
+
+            if (busqueda == string.Empty && texto == string.Empty && opcion == string.Empty)
+                return View(db.Pacientes.ToList());
+            else
+            {
+                if (busqueda == "SI" || busqueda=="NO")
+                {
+                       var consulta = from p in db.Pacientes
+                                       where p.asegurado.Contains(busqueda)
+                                       select  p;
+
+
+                        return View(consulta);
+                }
+                else
+                {
+                    var consulta = from p in db.Pacientes
+                                   where p.nombre.Contains(texto) || p.cedula.Contains(texto)
+                                   select p;
+                    return View(consulta);
+
+                }
+                
+            }
+            
+        }
         // GET: Pacientes/Details/5
         public ActionResult Details(int? id)
         {

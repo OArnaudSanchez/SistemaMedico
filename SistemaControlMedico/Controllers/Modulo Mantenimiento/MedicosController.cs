@@ -20,6 +20,22 @@ namespace SistemaControlMedico.Controllers
             return View(db.Medicos.ToList());
         }
 
+        [HttpPost]
+        public ActionResult Index(string busqueda)
+        {
+            if(busqueda == string.Empty)
+            return View(db.Medicos.ToList());
+            else
+            {
+                var consulta = from m in db.Medicos
+                               where m.nombre.Contains(busqueda) || m.especialidad.Contains(busqueda)
+                               select m;
+
+                return View(consulta);
+            }
+        }
+
+
         // GET: Medicos/Details/5
         public ActionResult Details(int? id)
         {
