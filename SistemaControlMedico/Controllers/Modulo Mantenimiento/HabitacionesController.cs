@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 using SistemaControlMedico.Models;
 
 namespace SistemaControlMedico.Controllers
@@ -15,25 +17,42 @@ namespace SistemaControlMedico.Controllers
         private SistemaMedicoDbContext db = new SistemaMedicoDbContext();
 
         // GET: Habitaciones
-        public ActionResult Index()
+        public ActionResult Index(int? i)
         {
-            return View(db.Habitaciones.ToList());
+            return View(db.Habitaciones.ToList().ToPagedList(i ?? 1, 3));
         }
 
         [HttpPost]
-        public ActionResult Index(string busqueda,string opcion)
+        public ActionResult Index(string BuscarPor, int? i)
         {
-            if (busqueda == string.Empty)
-                return View(db.Habitaciones.ToList());
+            if ( BuscarPor=="")
+                return View(db.Habitaciones.ToList().ToPagedList(i ?? 1, 3));
             else
             {
+                if (BuscarPor == "DOBLE")
+                {
                     var consulta = (from h in db.Habitaciones
-                                   where h.tipo.Contains(busqueda)
-                                   select h);
-                return View(consulta);
-               
+                                    where h.tipo.Contains(BuscarPor)
+                                    select h);
+                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                }
+                if (BuscarPor== "PRIVADA")
+                {
+                    var consulta = (from h in db.Habitaciones
+                                    where h.tipo.Contains(BuscarPor)
+                                    select h);
+                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                }
+                if (BuscarPor== "SUITE")
+                {
+                    var consulta = (from h in db.Habitaciones
+                                    where h.tipo.Contains(BuscarPor)
+                                    select h);
+                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                }
+                   
             }
-
+            return View();
         }
 
         // GET: Habitaciones/Details/5

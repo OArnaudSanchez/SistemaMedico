@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList.Mvc;
+using PagedList;
 using SistemaControlMedico.Models;
 
 namespace SistemaControlMedico.Controllers.Modulo_Procesos
@@ -15,31 +17,41 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
         private SistemaMedicoDbContext db = new SistemaMedicoDbContext();
 
         // GET: Ingresos
-        public ActionResult Index()
+        public ActionResult Index(int? x)
         {
             var ingresos = db.Ingresos.Include(i => i.Habitaciones).Include(i => i.Medicos).Include(i => i.Pacientes);
-            return View(ingresos.ToList());
+            return View(ingresos.ToList().ToPagedList(x ?? 1, 3));
         }
 
         [HttpPost]
-        public ActionResult Index(string busqueda)
+        public ActionResult Index(string busqueda, string BuscarPor, int? x)
         {
-            if (busqueda == string.Empty)
+            if (busqueda == string.Empty || BuscarPor =="")
             {
                 var ingresos = db.Ingresos.Include(i => i.Habitaciones)
                     .Include(i => i.Medicos).Include(i => i.Pacientes);
-                return View(ingresos.ToList());
+                return View(ingresos.ToList().ToPagedList(x ?? 1, 3));
             }
             else
             {
-                var consulta = from i in db.Ingresos
-                               join h in db.Habitaciones on i.habitacion equals h.idHabitacion
-                               where i.fechaIngreso.ToString().Contains(busqueda) || h.tipo.Contains(busqueda)
-                               select i;
-
-
-                return View(consulta);
+                if (BuscarPor == "Fecha")
+                {
+                    var consulta = from i in db.Ingresos
+                                   join h in db.Habitaciones on i.habitacion equals h.idHabitacion
+                                   where i.fechaIngreso.ToString().Contains(busqueda)
+                                   select i;
+                    return View(consulta.ToList().ToPagedList(x ?? 1, 3));
+                }
+                if (BuscarPor == "Habitacion")
+                {
+                    var consulta = from i in db.Ingresos
+                                   join h in db.Habitaciones on i.habitacion equals h.idHabitacion
+                                   where h.tipo.Contains(busqueda)
+                                   select i;
+                    return View(consulta.ToList().ToPagedList(x ?? 1, 3));
+                }
             }
+            return View();
         }
 
         // GET: Ingresos/Details/5

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList.Mvc;
+using PagedList;
 using SistemaControlMedico.Models;
 
 namespace SistemaControlMedico.Controllers
@@ -15,32 +17,52 @@ namespace SistemaControlMedico.Controllers
         private SistemaMedicoDbContext db = new SistemaMedicoDbContext();
 
         // GET: Citas
-        public ActionResult Index()
+        public ActionResult Index(int? i)
         {
             var citas = db.Citas.Include(c => c.Medicos).Include(c => c.Pacientes);
-            return View(citas.ToList());
+            return View(citas.ToList().ToPagedList(i ?? 1, 3));
         }
 
         [HttpPost]
-        public ActionResult Index(string busqueda)
+        public ActionResult Index(string busqueda, string BuscarPor, int? i)
         {
-            if (busqueda == string.Empty)
+            if (busqueda == string.Empty || BuscarPor == "")
             {
                 var citas = db.Citas.Include(c => c.Medicos).Include(c => c.Pacientes);
-                return View(citas.ToList());
+                return View(citas.ToList().ToPagedList(i ?? 1, 3));
             }
             else
             {
-                var consulta = from c in db.Citas
-                               join m in db.Medicos on c.medico equals m.idMedico
-                               join p in db.Pacientes on c.paciente equals p.idPaciente
-                               where c.fecha.ToString().Contains(busqueda) || m.nombre.Contains(busqueda) 
-                               || p.nombre.Contains(busqueda)
-                               select c;
-
-
-                return View(consulta);
+                if (BuscarPor == "Fecha")
+                {
+                    var consulta = from c in db.Citas
+                                   join m in db.Medicos on c.medico equals m.idMedico
+                                   join p in db.Pacientes on c.paciente equals p.idPaciente
+                                   where c.fecha.ToString().Contains(busqueda)
+                                   select c;
+                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                }
+                if (BuscarPor == "Doctor")
+                {
+                    var consulta = from c in db.Citas
+                                   join m in db.Medicos on c.medico equals m.idMedico
+                                   join p in db.Pacientes on c.paciente equals p.idPaciente
+                                   where m.nombre.Contains(busqueda)
+                                   select c;
+                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                }
+                if (BuscarPor == "Paciente")
+                {
+                    var consulta = from c in db.Citas
+                                   join m in db.Medicos on c.medico equals m.idMedico
+                                   join p in db.Pacientes on c.paciente equals p.idPaciente
+                                   where  p.nombre.Contains(busqueda)
+                                   select c;
+                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                }
+               
             }
+            return View();
         }
 
         // GET: Citas/Details/5

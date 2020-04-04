@@ -1,23 +1,27 @@
-﻿@model IEnumerable<SistemaControlMedico.Models.Pacientes>
+﻿@model IPagedList<SistemaControlMedico.Models.Pacientes>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "LIstado Pacientes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using PagedList.Mvc
+@using PagedList
 <h2>Index</h2>
 
 <button>Imprimir</button>
 
 
 <form action="Pacientes" , method="post">
-    <select name="busqueda">
-        <option value="" selected>Seleccione el Filtro</option>
-        <option value="SI">Asegurado</option>
+    <b>Buscar Por: </b>
+    <select name="buscarPor">
+        <option value="" selected>Seleccione El filtro</option>
+        <option value="SI">Paciente Asegurado</option>
         <option value="NO">No Asegurado</option>
     </select>
 
-    <input type="text" name="texto" placeholder="Ingrese el Nombre o Cedula del Paciente">
+    <input type="text" name="busqueda">
+
 
     <input type="submit" value="BUSCAR">
     <input type="submit" value="LIMPIAR">
@@ -29,13 +33,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.cedula)
+            @Html.DisplayNameFor(model => model.First().cedula)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.nombre)
+            @Html.DisplayNameFor(model => model.First().nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.asegurado)
+            @Html.DisplayNameFor(model => model.First().asegurado)
         </th>
         <th></th>
     </tr>
@@ -61,3 +65,4 @@
     }
 
 </table>
+@Html.PagedListPager(Model, i => Url.Action("Index", "Pacientes", new { i, buscar = Request.QueryString["buscar"] }))

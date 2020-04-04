@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 using SistemaControlMedico.Models;
 
 namespace SistemaControlMedico.Controllers
@@ -15,24 +17,34 @@ namespace SistemaControlMedico.Controllers
         private SistemaMedicoDbContext db = new SistemaMedicoDbContext();
 
         // GET: Medicos
-        public ActionResult Index()
+        public ActionResult Index(int ?i)
         {
-            return View(db.Medicos.ToList());
+            return View(db.Medicos.ToList().ToPagedList(i ?? 1 , 3));
         }
 
         [HttpPost]
-        public ActionResult Index(string busqueda)
+        public ActionResult Index(string busqueda, string BuscarPor, int? i)
         {
-            if(busqueda == string.Empty)
-            return View(db.Medicos.ToList());
+            if(busqueda == string.Empty || BuscarPor=="")
+            return View(db.Medicos.ToList().ToPagedList(i ?? 1, 3));
             else
             {
-                var consulta = from m in db.Medicos
-                               where m.nombre.Contains(busqueda) || m.especialidad.Contains(busqueda)
-                               select m;
-
-                return View(consulta);
+                if (BuscarPor == "Nombre")
+                {
+                    var consulta = from m in db.Medicos
+                                   where m.nombre.Contains(busqueda)
+                                   select m;
+                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                }
+                if (BuscarPor=="Especialidad")
+                {
+                    var consulta = from m in db.Medicos
+                                   where m.especialidad.Contains(busqueda)
+                                   select m;
+                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                }
             }
+            return View();
         }
 
 

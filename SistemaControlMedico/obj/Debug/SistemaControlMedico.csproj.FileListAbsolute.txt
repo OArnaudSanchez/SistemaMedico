@@ -87,3 +87,8 @@ C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.CambiandoDatos.resources
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.CambiandoDatoss.resources
 C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\obj\Debug\SistemaControlMedico.Migrations.Prueba.resources
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\bin\Rotativa.dll
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\bin\PagedList.dll
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\bin\PagedList.Mvc.dll
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\bin\PagedList.xml
+C:\Users\Cheche\source\repos\SistemaControlMedico\SistemaControlMedico\bin\PagedList.Mvc.xml

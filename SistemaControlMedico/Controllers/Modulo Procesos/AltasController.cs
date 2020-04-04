@@ -4,8 +4,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using Rotativa;
+using PagedList.Mvc;
+using PagedList;
 using SistemaControlMedico.Models;
 
 namespace SistemaControlMedico.Controllers.Modulo_Procesos
@@ -15,37 +17,55 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
         private SistemaMedicoDbContext db = new SistemaMedicoDbContext();
         
         // GET: Altas
-        public ActionResult Index()
+        public ActionResult Index(int? i)
         {
             var altas = db.Altas.Include(a => a.Ingresos);
-            return View(altas.ToList());
+            return View(altas.ToList().ToPagedList(i ?? 1 , 3));
+        }
+
+        public ActionResult PDF()
+        {
+            var imprimir = new ActionAsPdf("Index");
+            return imprimir;
         }
 
         [HttpPost]
-        public ActionResult Index(string busqueda, string opcion)
+        public ActionResult Index(string busqueda, string BuscarPor, int? x)
         {
-            if (busqueda == string.Empty)
+            if (busqueda == string.Empty || BuscarPor=="")
             {
                 var altas = db.Altas.Include(a => a.Ingresos);
-                return View(altas.ToList());
+                return View(altas.ToList().ToPagedList(x ?? 1, 3));
             }
             else
             {
-                var consulta = from a in db.Altas
-                               join p in db.Pacientes on a.Ingresos.paciente equals p.idPaciente
-                               join i in db.Ingresos on a.ingreso equals i.idIngreso
-                               where p.nombre.Contains(busqueda) || i.fechaIngreso.ToString().Contains(busqueda) || a.fechaSalida.ToString().Contains(busqueda)
-                               select a;
-
-                if(opcion == "count") ViewBag.conteo = consulta.Count();
-                //if (opcion == "sum") ViewBag.suma = consulta.Sum();
-                //if (opcion == "avg") ViewBag.promedio = consulta.Average();
-                //if (opcion == "max") ViewBag.mayor = consulta.Max();
-                //if(opcion == "min") ViewBag.menor = consulta.Min();
-
-                return View(consulta);
+                if(BuscarPor == "Fecha")
+                {
+                    var consulta = from a in db.Altas
+                                   join p in db.Pacientes on a.Ingresos.paciente equals p.idPaciente
+                                   join i in db.Ingresos on a.ingreso equals i.idIngreso
+                                   where  i.fechaIngreso.ToString().Contains(busqueda) || a.fechaSalida.ToString().Contains(busqueda)
+                                   select a;
+                    return View(consulta.ToList().ToPagedList(x ?? 1, 3));
+                }
+                if (BuscarPor== "Paciente")
+                {
+                    var consulta = from a in db.Altas
+                                   join p in db.Pacientes on a.Ingresos.paciente equals p.idPaciente
+                                   join i in db.Ingresos on a.ingreso equals i.idIngreso
+                                   where p.nombre.Contains(busqueda) 
+                                   select a;
+                    if (BuscarPor == "count") ViewBag.conteo = consulta.Count();
+                    //if (opcion == "sum") ViewBag.suma = consulta.Sum();
+                    //if (opcion == "avg") ViewBag.promedio = consulta.Average();
+                    //if (opcion == "max") ViewBag.mayor = consulta.Max();
+                    //if(opcion == "min") ViewBag.menor = consulta.Min();
+                    return View(consulta.ToList().ToPagedList(x ?? 1, 3));
+                }
             }
+            return View();
         }
+
 
         // GET: Altas/Details/5
         public ActionResult Details(int? id)

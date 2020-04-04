@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 using SistemaControlMedico.Models;
 
 namespace SistemaControlMedico.Controllers
@@ -15,34 +17,43 @@ namespace SistemaControlMedico.Controllers
         private SistemaMedicoDbContext db = new SistemaMedicoDbContext();
 
         // GET: Pacientes
-        public ActionResult Index()
+        public ActionResult Index(int? i)
         {
-            return View(db.Pacientes.ToList());
+            return View(db.Pacientes.ToList().ToPagedList(i ?? 1, 3));
         }
 
         [HttpPost]
-        public ActionResult Index(string busqueda, string texto,string opcion)
+        public ActionResult Index(string busqueda, string buscarPor, int? i)
         {
 
-            if (busqueda == string.Empty && texto == string.Empty && opcion == string.Empty)
-                return View(db.Pacientes.ToList());
+            if (busqueda == string.Empty && buscarPor == "")
+                return View(db.Pacientes.ToList().ToPagedList(i ?? 1, 3));
             else
             {
-                if (busqueda == "SI" || busqueda=="NO")
+                if (buscarPor == "SI" || buscarPor=="NO")
                 {
                        var consulta = from p in db.Pacientes
                                        where p.asegurado.Contains(busqueda)
                                        select  p;
 
 
-                        return View(consulta);
+                        return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                }
+                if (buscarPor == "SI" || buscarPor == "NO" && busqueda == string.Empty)
+                {
+                    var consulta = from p in db.Pacientes
+                                   where p.asegurado.Contains(busqueda)
+                                   select p;
+
+
+                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
                 }
                 else
                 {
                     var consulta = from p in db.Pacientes
-                                   where p.nombre.Contains(texto) || p.cedula.Contains(texto)
+                                   where p.nombre.Contains(busqueda) || p.cedula.Contains(busqueda)
                                    select p;
-                    return View(consulta);
+                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
 
                 }
                 

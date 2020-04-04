@@ -1,10 +1,12 @@
-﻿@model IEnumerable<SistemaControlMedico.Models.Altas>
+﻿@model IPagedList<SistemaControlMedico.Models.Altas>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Listado Altas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@using PagedList.Mvc;
+@using PagedList;
 <h2>Index</h2>
 
 @{
@@ -13,31 +15,41 @@
         <span>El Conteo es: @ViewBag.conteo</span>
     }
     @*if (ViewBag.suma != null)
-    {
-        <span>La Suma es: @ViewBag.suma</span>
-    }
-    if (ViewBag.promedio != null)
-    {
-        <span>El Promedio es: @ViewBag.promedio</span>
-    }*@
+        {
+            <span>La Suma es: @ViewBag.suma</span>
+        }
+        if (ViewBag.promedio != null)
+        {
+            <span>El Promedio es: @ViewBag.promedio</span>
+        }*@
     @*if (ViewBag.mayor != null)
-    {
-        <span>El Mayor es: @ViewBag.mayor</span>
-    }
-    if (ViewBag.menor != null)
-    {
-        <span>El Menor es: @ViewBag.menor</span>
-        <span>El Menor es: @ViewBag.menor</span>
-    }*@
+        {
+            <span>El Mayor es: @ViewBag.mayor</span>
+        }
+        if (ViewBag.menor != null)
+        {
+            <span>El Menor es: @ViewBag.menor</span>
+            <span>El Menor es: @ViewBag.menor</span>
+        }*@
 
 }
 
-<button>Imprimir</button>
+@Html.ActionLink("Exportar a PDF", "PDF", null, new { @class = "btn btn-success" })
+
 
 <form action="Altas" , method="post">
-    <input type="text" name="busqueda" placeholder="Ingrese el paciente o la fecha de salida">
 
-    <select name="opcion">
+    <b>Buscar Por: </b>
+    <select name="BuscarPor">
+        <option value="" selected>Seleccione El filtro</option>
+        <option value="Paciente">Paciente</option>
+        <option value="Fecha">Fecha</option>
+    </select>
+
+    <input type="text" name="busqueda">
+
+
+    <select name="BuscarPor">
         <option value="" selected>Seleccione la Operacion</option>
         <option value="count">Conteo</option>
         <option value="sum">Suma Total</option>
@@ -45,72 +57,80 @@
         <option value="max">Monto Mayor</option>
         <option value="min">Monto Menor</option>
     </select>
+    <input type="submit" id="BtnBuscar" value="BUSCAR" />
+    <input type="submit" value="LIMPIAR" />
 
-    <input type="submit" value="BUSCAR">
-    <input type="submit" value="LIMPIAR">
 </form>
+<div class="container">
 
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ingresos.idIngreso)
-        </th>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Ingresos.idIngreso)
+                </th>
 
-        <th>
-            @Html.DisplayNameFor(model => model.nombreP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cedulaP)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombreM)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaI)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fechaSalida)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.monto)
-        </th>
-        <th></th>
-    </tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().nombreP)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().cedulaP)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().nombreM)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().fechaI)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().fechaSalida)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().monto)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingresos.idIngreso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingresos.Pacientes.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingresos.Pacientes.cedula)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingresos.Medicos.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ingresos.fechaIngreso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaSalida)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.monto)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idAlta }) |
-                @Html.ActionLink("Details", "Details", new { id = item.idAlta }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.idAlta })
-            </td>
-        </tr>
-    }
+        <tbody id="DataBusqueda">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ingresos.idIngreso)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ingresos.Pacientes.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ingresos.Pacientes.cedula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ingresos.Medicos.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ingresos.fechaIngreso)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaSalida)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.monto)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", null, new { id = item.idAlta, @class = "btn btn-success" }) |
+                        @Html.ActionLink("Details", "Details", null, new { id = item.idAlta, @class = "btn btn-success" }) |
+                        @Html.ActionLink("Delete", "Delete", null, new { id = item.idAlta, @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
 
-</table>
+    </table>
+
+    @Html.PagedListPager(Model, x=>Url.Action("Index","Altas", new {x, buscar= Request.QueryString["buscar"] }))
+</div>
