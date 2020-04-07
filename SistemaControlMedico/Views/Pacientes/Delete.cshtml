@@ -1,0 +1,49 @@
+﻿@model SistemaControlMedico.Models.Pacientes
+
+@{
+    ViewBag.Title = "Eliminar Pacientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <h3>Eliminar Pacientes</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.cedula)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cedula)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.asegurado)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.asegurado)
+            </dd>
+
+        </dl>
+        <hr>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-danger" />
+                @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        }
+    </div>
+    <hr>
+</div>

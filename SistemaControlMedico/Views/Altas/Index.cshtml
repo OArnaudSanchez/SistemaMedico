@@ -1,0 +1,156 @@
+﻿@model IPagedList<SistemaControlMedico.Models.Altas>
+
+@{
+    ViewBag.Title = "Listado Altas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+
+
+<div>
+    <div>
+        <h2>Altas</h2>
+        <hr>
+        <div class="form-actions no-color">
+
+            <form action="Altas" method="post">
+
+                <b>Buscar Por: </b>
+                <select name="BuscarPor" class="form-control">
+                    <option value="" selected>Seleccione El filtro</option>
+                    <option value="Paciente">Paciente</option>
+                    <option value="Fecha">Fecha</option>
+                </select><br>
+
+                <input type="text" id="busqueda" name="busqueda" class="form-control" placeholder="Ingrese la Busqueda">
+                <br>
+                <select name="BuscarPor" class="form-control">
+                    <option value="" selected>Seleccione la Operacion</option>
+                    <option value="count">Conteo</option>
+                    <option value="sum">Suma Total</option>
+                    <option value="avg">Promedio</option>
+                    <option value="max">Monto Mayor</option>
+                    <option value="min">Monto Menor</option>
+                </select><br>
+
+                <div class="form-actions no-color">
+                    @Html.ActionLink("Agregar", "Create", null, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Exportar a PDF", "PDF", null, new { @class = "btn btn-success" })
+                    <input type="submit" value="BUSCAR" class="btn btn-primary">
+                    <input type="submit" value="LIMPIAR" class="btn btn-primary">
+                </div>
+                <hr>
+            </form>
+        </div>
+    </div>
+
+    <div>
+
+        <div class="container">
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().idAlta)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().Ingresos.idIngreso)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().nombreP)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().cedulaP)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().nombreM)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().fechaI)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().fechaSalida)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().monto)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tbody id="DataBusqueda">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.idAlta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ingresos.idIngreso)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ingresos.Pacientes.nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ingresos.Pacientes.cedula)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ingresos.Medicos.nombre)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Ingresos.fechaIngreso)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.fechaSalida)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.monto)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Modificar", "Edit", new { id = item.idAlta }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("Ver Detalles", "Details", new { id = item.idAlta }, new { @class = "btn btn-info" })
+                                @Html.ActionLink("Eliminar", "Delete", new { id = item.idAlta }, new { @class = "btn btn-danger" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+            <hr>
+
+            @Html.PagedListPager(Model, x => Url.Action("Index", "Altas", new { x, buscar = Request.QueryString["buscar"] }))
+        </div>
+        <hr>
+    </div>
+</div>
+
+@{
+    if (ViewBag.conteo != null)
+    {
+        <span>El Conteo es: @ViewBag.conteo</span>
+    }
+    @*if (ViewBag.suma != null)
+        {
+            <span>La Suma es: @ViewBag.suma</span>
+        }
+        if (ViewBag.promedio != null)
+        {
+            <span>El Promedio es: @ViewBag.promedio</span>
+        }*@
+    @*if (ViewBag.mayor != null)
+        {
+            <span>El Mayor es: @ViewBag.mayor</span>
+        }
+        if (ViewBag.menor != null)
+        {
+            <span>El Menor es: @ViewBag.menor</span>
+            <span>El Menor es: @ViewBag.menor</span>
+        }*@
+
+}
+
+

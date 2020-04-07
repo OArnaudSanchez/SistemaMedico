@@ -1,0 +1,52 @@
+﻿@model SistemaControlMedico.Models.Altas
+
+@{
+    ViewBag.Title = "Eliminar Altas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div>
+        <h4>Eliminar Altas</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Ingresos.idIngreso)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ingresos.idIngreso)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fechaSalida)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fechaSalida)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.monto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.monto)
+            </dd>
+
+        </dl>
+        <hr>
+    </div>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-primary" />
+                @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        }
+    </div>
+    <hr>
+</div>
