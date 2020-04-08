@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using PagedList.Mvc;
 using PagedList;
 using SistemaControlMedico.Models;
+using Rotativa;
 
 namespace SistemaControlMedico.Controllers
 {
@@ -63,6 +64,11 @@ namespace SistemaControlMedico.Controllers
                 return View(db.Citas.ToList().ToPagedList(i ?? 1, 3));
             }
             
+        }
+
+        public ActionResult PDF()
+        {
+            return new ActionAsPdf("Index") { FileName = "Citas.pdf" };
         }
 
         // GET: Citas/Details/5

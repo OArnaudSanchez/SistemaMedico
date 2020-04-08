@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using PagedList.Mvc;
 using PagedList;
 using SistemaControlMedico.Models;
+using Rotativa;
 
 namespace SistemaControlMedico.Controllers.Modulo_Procesos
 {
@@ -53,6 +54,11 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
                 return View(db.Ingresos.ToList().ToPagedList(x ?? 1, 3));
             }
             
+        }
+
+        public ActionResult PDF()
+        {
+            return new ActionAsPdf("Index") { FileName = "Ingresos.pdf" };
         }
 
         // GET: Ingresos/Details/5

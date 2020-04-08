@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using Rotativa;
 using SistemaControlMedico.Models;
 
 namespace SistemaControlMedico.Controllers
@@ -74,6 +75,11 @@ namespace SistemaControlMedico.Controllers
             
             
         }
+
+        public ActionResult PDF()
+        {
+            return new ActionAsPdf("Index") { FileName = "Pacientes.pdf" };
+        }
         // GET: Pacientes/Details/5
         public ActionResult Details(int? id)
         {
@@ -118,7 +124,7 @@ namespace SistemaControlMedico.Controllers
             }
             catch (Exception ex)
             {
-                return Content("Ya existe la Cedula que quiere agregar");
+                return Content("Ya existe la Cedula que quiere agregar, Intentelo de Nuevo");
             }
             
         }

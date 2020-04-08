@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using Rotativa;
 using SistemaControlMedico.Models;
 
 namespace SistemaControlMedico.Controllers
@@ -47,7 +48,10 @@ namespace SistemaControlMedico.Controllers
             }
             
         }
-
+        public ActionResult PDF()
+        {
+            return new ActionAsPdf("Index") { FileName = "Medicos.pdf" };
+        }
 
         // GET: Medicos/Details/5
         public ActionResult Details(int? id)

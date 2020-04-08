@@ -27,8 +27,7 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
 
         public ActionResult PDF()
         {
-            var imprimir = new ActionAsPdf("Index");
-            return imprimir;
+            return new ActionAsPdf("Index") { FileName = "Altas.pdf" };
         }
 
         [HttpPost]
@@ -141,8 +140,6 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
             }
             
         }
-
-
         // GET: Altas/Details/5
         public ActionResult Details(int? id)
         {

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using PagedList.Mvc;
+using Rotativa;
 using SistemaControlMedico.Models;
 
 namespace SistemaControlMedico.Controllers
@@ -54,7 +55,10 @@ namespace SistemaControlMedico.Controllers
             }
             
         }
-
+        public ActionResult PDF()
+        {
+            return new ActionAsPdf("Index") { FileName="Habitacion.pdf"};
+        }
         // GET: Habitaciones/Details/5
         public ActionResult Details(int? id)
         {
@@ -83,14 +87,21 @@ namespace SistemaControlMedico.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idHabitacion,numero,tipo,precioDia")] Habitaciones habitaciones)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Habitaciones.Add(habitaciones);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    db.Habitaciones.Add(habitaciones);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            return View(habitaciones);
+                return View(habitaciones);
+            }catch(Exception ex)
+            {
+                return Content("El numero de habitacion que quiere ingresar no es valido o ya existe");
+            }
+         
         }
 
         // GET: Habitaciones/Edit/5

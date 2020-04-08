@@ -393,6 +393,10 @@
     <Compile Include="Migrations\202004050649019_Validacion.Designer.cs">
       <DependentUpon>202004050649019_Validacion.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004080557152_Limpieza.cs" />
+    <Compile Include="Migrations\202004080557152_Limpieza.Designer.cs">
+      <DependentUpon>202004080557152_Limpieza.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Altas.cs" />
     <Compile Include="Models\Citas.cs" />
@@ -468,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004050649019_Validacion.resx">
       <DependentUpon>202004050649019_Validacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004080557152_Limpieza.resx">
+      <DependentUpon>202004080557152_Limpieza.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
