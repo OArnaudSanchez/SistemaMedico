@@ -25,46 +25,53 @@ namespace SistemaControlMedico.Controllers
         [HttpPost]
         public ActionResult Index(string busqueda, string buscarPor, int? i)
         {
-
-            if (busqueda == string.Empty && buscarPor == "")
-                return View(db.Pacientes.ToList().ToPagedList(i ?? 1, 3));
-            else
+            try
             {
-                if (buscarPor == "SI" || buscarPor=="NO")
+                if (busqueda == string.Empty && buscarPor == "")
+                    return View(db.Pacientes.ToList().ToPagedList(i ?? 1, 3));
+                else
                 {
-                       var consulta = from p in db.Pacientes
+                    if (buscarPor == "SI" || buscarPor == "NO")
+                    {
+                        var consulta = from p in db.Pacientes
                                        where p.asegurado.Contains(buscarPor)
-                                       select  p;
+                                       select p;
 
 
                         return View(consulta.ToList().ToPagedList(i ?? 1, 3));
-                }
-                if (buscarPor == "SI" || buscarPor == "NO" && busqueda == string.Empty)
-                {
-                    var consulta = from p in db.Pacientes
-                                   where p.asegurado.Contains(buscarPor)
-                                   select p;
+                    }
+                    if (buscarPor == "SI" || buscarPor == "NO" && busqueda == string.Empty)
+                    {
+                        var consulta = from p in db.Pacientes
+                                       where p.asegurado.Contains(buscarPor)
+                                       select p;
 
 
-                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
-                }
-                if (buscarPor == "Nombre")
-                {
-                    var consulta = from p in db.Pacientes
-                                   where p.nombre.Contains(busqueda)
-                                   select p;
-                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
-                }
-                if (buscarPor=="Cedula")
-                {
-                    var consulta = from p in db.Pacientes
-                                   where p.cedula.Contains(busqueda)
-                                   select p;
-                    return View(consulta.ToList().ToPagedList(i ?? 1, 3));
-                }
+                        return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                    }
+                    if (buscarPor == "Nombre")
+                    {
+                        var consulta = from p in db.Pacientes
+                                       where p.nombre.Contains(busqueda)
+                                       select p;
+                        return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                    }
+                    if (buscarPor == "Cedula")
+                    {
+                        var consulta = from p in db.Pacientes
+                                       where p.cedula.Contains(busqueda)
+                                       select p;
+                        return View(consulta.ToList().ToPagedList(i ?? 1, 3));
+                    }
 
-                return View(db.Pacientes.ToList().ToPagedList(i ?? 1, 3));
+                    return View(db.Pacientes.ToList().ToPagedList(i ?? 1, 3));
+                }
             }
+            catch (FormatException ex)
+            {
+                return RedirectToAction("Index");
+            }
+            
             
         }
         // GET: Pacientes/Details/5
@@ -95,17 +102,25 @@ namespace SistemaControlMedico.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idPaciente,cedula,nombre,asegurado")] Pacientes pacientes)
         {
-            int id = pacientes.idPaciente;
-            var opcion = db.Pacientes.Where(x => x.idPaciente == id).Count();
-
-            if (ModelState.IsValid)
+            try
             {
-                db.Pacientes.Add(pacientes);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                int id = pacientes.idPaciente;
+                var opcion = db.Pacientes.Where(x => x.idPaciente == id).Count();
+
+                if (ModelState.IsValid)
+                {
+                    db.Pacientes.Add(pacientes);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                ViewBag.opcionID = opcion;
+                return View(pacientes);
             }
-            ViewBag.opcionID = opcion;
-            return View(pacientes);
+            catch (Exception ex)
+            {
+                return Content("Ya existe la Cedula que quiere agregar");
+            }
+            
         }
 
         // GET: Pacientes/Edit/5
@@ -130,13 +145,21 @@ namespace SistemaControlMedico.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idPaciente,cedula,nombre,asegurado")] Pacientes pacientes)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(pacientes).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Entry(pacientes).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return View(pacientes);
             }
-            return View(pacientes);
+            catch (Exception ex)
+            {
+                return View("Edit");
+            }
+            
         }
 
         // GET: Pacientes/Delete/5
@@ -159,10 +182,18 @@ namespace SistemaControlMedico.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Pacientes pacientes = db.Pacientes.Find(id);
-            db.Pacientes.Remove(pacientes);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Pacientes pacientes = db.Pacientes.Find(id);
+                db.Pacientes.Remove(pacientes);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View("Delete");
+            }
+            
         }
 
         protected override void Dispose(bool disposing)
