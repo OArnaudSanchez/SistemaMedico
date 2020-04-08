@@ -13,37 +13,63 @@
     <div>
         <h2>Altas</h2>
         <hr>
+
         <div class="form-actions no-color">
 
-            <form action="Altas" method="post">
+            <form action="/Altas" method="post">
 
                 <b>Buscar Por: </b>
                 <select name="BuscarPor" class="form-control">
                     <option value="" selected>Seleccione El filtro</option>
                     <option value="Paciente">Paciente</option>
-                    <option value="Fecha">Fecha</option>
+                    <option value="FechaIngreso">Fecha Ingreso</option>
+                    <option value="FechaSalida">Fecha Salida</option>
+
                 </select><br>
 
                 <input type="text" id="busqueda" name="busqueda" class="form-control" placeholder="Ingrese la Busqueda">
                 <br>
-                <select name="BuscarPor" class="form-control">
+                <select name="opcion" class="form-control">
                     <option value="" selected>Seleccione la Operacion</option>
                     <option value="count">Conteo</option>
-                    <option value="sum">Suma Total</option>
                     <option value="avg">Promedio</option>
                     <option value="max">Monto Mayor</option>
                     <option value="min">Monto Menor</option>
                 </select><br>
 
                 <div class="form-actions no-color">
-                    @Html.ActionLink("Agregar", "Create", null, new { @class = "btn btn-success" })
-                    @Html.ActionLink("Exportar a PDF", "PDF", null, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Agregar", "Create", null, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Exportar a PDF", "PDF", null, new { @class = "btn btn-primary" })
                     <input type="submit" value="BUSCAR" class="btn btn-primary">
                     <input type="submit" value="LIMPIAR" class="btn btn-primary">
                 </div>
                 <hr>
             </form>
         </div>
+    </div>
+
+    <div>
+        @{
+            if (@ViewBag.conteo != null)
+            {
+                <span>El conteo es: @ViewBag.conteo</span><br>
+
+            }
+            if (@ViewBag.min != null)
+            {
+                <span>La fecha minima es: @ViewBag.min</span><br>
+            }
+            if (@ViewBag.max != null)
+            {
+                <span>La Fecha Maxima es: @ViewBag.max</span><br>
+
+            }
+            if (@ViewBag.avg != null)
+            {
+                <span>El promedio del Total de montos es: @ViewBag.avg</span>
+
+            }
+        }
     </div>
 
     <div>
@@ -127,30 +153,4 @@
         <hr>
     </div>
 </div>
-
-@{
-    if (ViewBag.conteo != null)
-    {
-        <span>El Conteo es: @ViewBag.conteo</span>
-    }
-    @*if (ViewBag.suma != null)
-        {
-            <span>La Suma es: @ViewBag.suma</span>
-        }
-        if (ViewBag.promedio != null)
-        {
-            <span>El Promedio es: @ViewBag.promedio</span>
-        }*@
-    @*if (ViewBag.mayor != null)
-        {
-            <span>El Mayor es: @ViewBag.mayor</span>
-        }
-        if (ViewBag.menor != null)
-        {
-            <span>El Menor es: @ViewBag.menor</span>
-            <span>El Menor es: @ViewBag.menor</span>
-        }*@
-
-}
-
 

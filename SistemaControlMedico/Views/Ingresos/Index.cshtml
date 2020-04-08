@@ -8,7 +8,7 @@
 @using PagedList.Mvc;
 @using PagedList;
 
-<h2>Habitaciones</h2>
+<h2>Ingresos</h2>
 <div>
     <div>
         <form action="Ingresos" method="post">
@@ -22,10 +22,10 @@
             <input type="text" id="busqueda" name="busqueda" class="form-control" placeholder="Ingrese la Busqueda">
             <br>
             <div class="form-actions no-color">
-                @Html.ActionLink("Agregar", "Create", null, new { @class = "btn btn-success" })
+                @Html.ActionLink("Agregar", "Create", null, new { @class = "btn btn-primary" })
                 <input type="submit" value="BUSCAR" class="btn btn-primary">
                 <input type="submit" value="LIMPIAR" class="btn btn-primary">
-                <button class="btn btn-info">Imprimir</button>
+                @Html.ActionLink("Exportar a PDF", "PDF", null, new { @class = "btn btn-primary" })
             </div>
             <hr>
         </form>

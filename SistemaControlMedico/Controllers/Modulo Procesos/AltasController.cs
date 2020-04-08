@@ -9,6 +9,8 @@ using Rotativa;
 using PagedList.Mvc;
 using PagedList;
 using SistemaControlMedico.Models;
+using System.Data.Entity.SqlServer;
+using System.Data.Entity.Core.Objects;
 
 namespace SistemaControlMedico.Controllers.Modulo_Procesos
 {
@@ -30,7 +32,7 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
         }
 
         [HttpPost]
-        public ActionResult Index(string busqueda, string BuscarPor, int? x)
+        public ActionResult Index(string busqueda, string BuscarPor, int? x,string operacion)
         {
             if (busqueda == string.Empty || BuscarPor=="")
             {
@@ -39,15 +41,70 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
             }
             else
             {
-                if(BuscarPor == "Fecha")
+                if(BuscarPor == "FechaIngreso")
                 {
                     var consulta = from a in db.Altas
                                    join p in db.Pacientes on a.Ingresos.paciente equals p.idPaciente
                                    join i in db.Ingresos on a.ingreso equals i.idIngreso
-                                   where  i.fechaIngreso.ToString().Contains(busqueda) || a.fechaSalida.ToString().Contains(busqueda)
+                                   where  i.fechaIngreso.ToString().Contains(busqueda)
                                    select a;
+
+                    if (Request["opcion"] == "count")
+                    {
+                        ViewBag.conteo = consulta.Count();
+
+                    }
+                    else if (Request["opcion"] == "min")
+                    {
+                        ViewBag.min = consulta.Select(p => p.Ingresos.fechaIngreso).Min();
+
+                    }
+                    else if (Request["opcion"] == "max")
+                    {
+                        ViewBag.max = consulta.Select(p => p.fechaSalida).Max();
+
+                    }
+                    else if (Request["opcion"] == "avg")
+                    {
+                        ViewBag.avg = consulta.Average(p => p.monto).ToString();
+
+                    }
+
                     return View(consulta.ToList().ToPagedList(x ?? 1, 3));
                 }
+
+                if (BuscarPor == "FechaSalida")
+                {
+                    var consulta = from a in db.Altas
+                                   join p in db.Pacientes on a.Ingresos.paciente equals p.idPaciente
+                                   join i in db.Ingresos on a.ingreso equals i.idIngreso
+                                   where a.fechaSalida.ToString().Contains(busqueda)
+                                   select a;
+
+                    if (Request["opcion"] == "count")
+                    {
+                        ViewBag.conteo = consulta.Count();
+
+                    }
+                    else if (Request["opcion"] == "min")
+                    {
+                        ViewBag.min = consulta.Select(p => p.Ingresos.fechaIngreso).Min();
+
+                    }
+                    else if (Request["opcion"] == "max")
+                    {
+                        ViewBag.max = consulta.Select(p => p.fechaSalida).Max();
+
+                    }
+                    else if (Request["opcion"] == "avg")
+                    {
+                        ViewBag.avg = consulta.Average(p => p.monto).ToString();
+
+                    }
+
+                    return View(consulta.ToList().ToPagedList(x ?? 1, 3));
+                }
+
                 if (BuscarPor== "Paciente")
                 {
                     var consulta = from a in db.Altas
@@ -55,11 +112,29 @@ namespace SistemaControlMedico.Controllers.Modulo_Procesos
                                    join i in db.Ingresos on a.ingreso equals i.idIngreso
                                    where p.nombre.Contains(busqueda) 
                                    select a;
-                    if (BuscarPor == "count") ViewBag.conteo = consulta.Count();
-                    //if (opcion == "sum") ViewBag.suma = consulta.Sum();
-                    //if (opcion == "avg") ViewBag.promedio = consulta.Average();
-                    //if (opcion == "max") ViewBag.mayor = consulta.Max();
-                    //if(opcion == "min") ViewBag.menor = consulta.Min();
+
+                    if (Request["opcion"] == "count")
+                    {
+                        ViewBag.conteo = consulta.Count();
+
+                    }
+                    else if (Request["opcion"] == "min")
+                    {
+                        ViewBag.min = consulta.Select(p => p.Ingresos.fechaIngreso).Min();
+
+                    }
+                    else if (Request["opcion"] == "max")
+                    {
+                        ViewBag.max = consulta.Select(p => p.fechaSalida).Max();
+
+                    }
+                    else if (Request["opcion"] == "avg")
+                    {
+                        ViewBag.avg = consulta.Average(p => p.monto).ToString();
+
+                    }
+
+
                     return View(consulta.ToList().ToPagedList(x ?? 1, 3));
                 }
                 return View(db.Altas.ToList().ToPagedList(x ?? 1, 3));
