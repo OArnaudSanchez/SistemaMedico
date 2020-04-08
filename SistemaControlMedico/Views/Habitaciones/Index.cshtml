@@ -1,0 +1,87 @@
+﻿@model IPagedList<SistemaControlMedico.Models.Habitaciones>
+
+@{
+
+    ViewBag.Title = "Listado Habitaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using PagedList.Mvc
+@using PagedList
+
+
+<h2>Habitaciones</h2>
+<div>
+    <div>
+        <form action="Habitaciones" method="post">
+            <b>Buscar Por: </b>
+            <select name="BuscarPor" class="form-control">
+                <option value="" selected>Seleccione El filtro</option>
+                <option value="DOBLE">Doble</option>
+                <option value="PRIVADA">Privada</option>
+                <option value="SUITE">Suite</option>
+
+            </select>
+            <br>
+            <div class="form-actions no-color">
+                @Html.ActionLink("Agregar", "Create", null, new { @class = "btn btn-primary" })
+                <input type="submit" value="BUSCAR" class="btn btn-primary">
+                <input type="submit" value="LIMPIAR" class="btn btn-primary">
+                @Html.ActionLink("Exportar a PDF", "PDF", null, new { @class = "btn btn-primary" })
+            </div>
+        </form>
+        <hr />
+    </div>
+    <div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().idHabitacion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().numero)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().tipo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().precioDia)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.idHabitacion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tipo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.precioDia)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Modificar", "Edit", new { id = item.idHabitacion }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Ver Detalles", "Details", new { id = item.idHabitacion }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.idHabitacion }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <hr>
+    <div>
+        @Html.PagedListPager(Model, i => Url.Action("Index", "Habitaciones", new { i, buscar = Request.QueryString["buscar"] }))
+    </div>
+</div>
+
+
+   

@@ -1,0 +1,43 @@
+﻿@model SistemaControlMedico.Models.Medicos
+
+@{
+    ViewBag.Title = "Informacion Medicos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h3>Detalles Medicos</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.exequatur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.exequatur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.especialidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.especialidad)
+        </dd>
+
+    </dl>
+</div>
+<hr />
+<p>
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.idMedico }, new { @class="btn btn-primary"}) 
+    @Html.ActionLink("Volver", "Index",null,new { @class="btn btn-primary"})
+</p>

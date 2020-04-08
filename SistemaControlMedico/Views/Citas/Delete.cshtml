@@ -1,0 +1,54 @@
+﻿@model SistemaControlMedico.Models.Citas
+
+@{
+    ViewBag.Title = "Eliminar Citas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <div>
+        <h4>Citas</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Medicos.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Medicos.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Pacientes.cedula)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Pacientes.cedula)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fecha)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fecha)
+            </dd>
+
+        </dl>
+    </div>
+    <hr>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Eliminar" class="btn btn-danger" />
+                @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        }
+        <hr>
+    </div>
+
+</div>

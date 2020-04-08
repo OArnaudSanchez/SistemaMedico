@@ -1,0 +1,56 @@
+﻿@model SistemaControlMedico.Models.Citas
+
+@{
+    ViewBag.Title = "Modificar Altas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div>
+        <h3>Modificar Citas</h3>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.idCita)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.paciente, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("paciente", null, "Seleccione el Paciente", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.paciente, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.medico, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("medico", null, "Seleccione el Medico", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.medico, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.fecha, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fecha, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Guardar" class="btn btn-primary" />
+                        @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-primary" })
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

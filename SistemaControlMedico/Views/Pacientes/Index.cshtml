@@ -1,0 +1,85 @@
+﻿@model IPagedList<SistemaControlMedico.Models.Pacientes>
+
+@{
+    ViewBag.Title = "LIstado Pacientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using PagedList.Mvc
+@using PagedList
+<h2>Pacientes</h2>
+<div>
+    <div>
+        <form action="Pacientes" method="post">
+            <b>Buscar Por: </b>
+            <select name="buscarPor" class="form-control">
+                <option value="" selected>Seleccione El filtro</option>
+                <option value="Nombre">Buscar Por Nombre</option>
+                <option value="Cedula">Buscar Por Cedula</option>
+                <option value="SI">Paciente Asegurado</option>
+                <option value="NO">No Asegurado</option>
+            </select>
+            <br>
+
+            <input type="text" id="busqueda" name="busqueda" class="form-control" placeholder="Ingrese la Busqueda">
+            <br>
+
+            <div class="form-actions no-color">
+                @Html.ActionLink("Agregar", "Create", null, new { @class = "btn btn-primary" })
+                <input type="submit" value="BUSCAR" class="btn btn-primary">
+                <input type="submit" value="LIMPIAR" class="btn btn-primary">
+                @Html.ActionLink("Exportar a PDF", "PDF", null, new { @class = "btn btn-primary" })
+
+            </div>
+        </form>
+    </div>
+    <div>
+
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().idPaciente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().cedula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().asegurado)
+                </th>
+                <th></th>
+            </tr>
+            <hr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.idPaciente)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cedula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.asegurado)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Modificar", "Edit", new { id = item.idPaciente }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Ver Detalles", "Details", new { id = item.idPaciente }, new { @class = "btn btn-info" })
+                        @Html.ActionLink("Eliminar", "Delete", new { id = item.idPaciente }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <hr>
+        @Html.PagedListPager(Model, i => Url.Action("Index", "Pacientes", new { i, buscar = Request.QueryString["buscar"] }))
+
+    </div>
+</div>
+
+  

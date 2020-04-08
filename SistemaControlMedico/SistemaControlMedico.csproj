@@ -43,7 +43,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -77,9 +97,6 @@
     <Reference Include="System.Web.Helpers">
       <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
@@ -88,19 +105,329 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\breadcrumb.css" />
+    <Content Include="Content\css\counter-up\jquery.counterup.js" />
+    <Content Include="Content\css\counter-up\jquery.waypoints.min.js" />
+    <Content Include="Content\css\flaticon.css" />
+    <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\themify-icons.css" />
+    <Content Include="Content\css\_about.css" />
+    <Content Include="Content\css\_courses.css" />
+    <Content Include="Content\css\_feature.css" />
+    <Content Include="Content\css\_price.css" />
+    <Content Include="Content\fonts\Flaticon.svg" />
+    <Content Include="Content\fonts\themify.svg" />
+    <Content Include="Content\img\background\bg1.jpg" />
+    <Content Include="Content\img\background\bg_1.png" />
+    <Content Include="Content\img\background\bg_2.png" />
+    <Content Include="Content\img\banner\about1.png" />
+    <Content Include="Content\img\banner\about2.png" />
+    <Content Include="Content\img\banner\banner-2.jpg" />
+    <Content Include="Content\img\banner\banner.jpg" />
+    <Content Include="Content\img\banner\home-banner.jpg" />
+    <Content Include="Content\img\banner\pattern_bg.jpg" />
+    <Content Include="Content\img\banner\shap-1.png" />
+    <Content Include="Content\img\banner\shap-2.png" />
+    <Content Include="Content\img\blog\1.jpg" />
+    <Content Include="Content\img\blog\2.jpg" />
+    <Content Include="Content\img\blog\3.jpg" />
+    <Content Include="Content\img\blog\add.jpg" />
+    <Content Include="Content\img\blog\author.png" />
+    <Content Include="Content\img\blog\blog1.png" />
+    <Content Include="Content\img\blog\blog2.png" />
+    <Content Include="Content\img\blog\blog3.png" />
+    <Content Include="Content\img\blog\c1.jpg" />
+    <Content Include="Content\img\blog\c1.png" />
+    <Content Include="Content\img\blog\c2.jpg" />
+    <Content Include="Content\img\blog\c2.png" />
+    <Content Include="Content\img\blog\c3.jpg" />
+    <Content Include="Content\img\blog\c3.png" />
+    <Content Include="Content\img\blog\c4.jpg" />
+    <Content Include="Content\img\blog\c5.jpg" />
+    <Content Include="Content\img\blog\c6.jpg" />
+    <Content Include="Content\img\blog\cat-post\cat-post-1.jpg" />
+    <Content Include="Content\img\blog\cat-post\cat-post-2.jpg" />
+    <Content Include="Content\img\blog\cat-post\cat-post-3.jpg" />
+    <Content Include="Content\img\blog\causes\causes-1.jpg" />
+    <Content Include="Content\img\blog\causes\causes-2.jpg" />
+    <Content Include="Content\img\blog\causes\causes-3.jpg" />
+    <Content Include="Content\img\blog\feature-img1.jpg" />
+    <Content Include="Content\img\blog\latest-post\l-post-1.jpg" />
+    <Content Include="Content\img\blog\latest-post\l-post-2.jpg" />
+    <Content Include="Content\img\blog\latest-post\l-post-3.jpg" />
+    <Content Include="Content\img\blog\latest-post\l-post-4.jpg" />
+    <Content Include="Content\img\blog\main-blog\m-blog-1.jpg" />
+    <Content Include="Content\img\blog\main-blog\m-blog-2.jpg" />
+    <Content Include="Content\img\blog\main-blog\m-blog-3.jpg" />
+    <Content Include="Content\img\blog\main-blog\m-blog-4.jpg" />
+    <Content Include="Content\img\blog\main-blog\m-blog-5.jpg" />
+    <Content Include="Content\img\blog\next.jpg" />
+    <Content Include="Content\img\blog\popular-post\post1.jpg" />
+    <Content Include="Content\img\blog\popular-post\post2.jpg" />
+    <Content Include="Content\img\blog\popular-post\post3.jpg" />
+    <Content Include="Content\img\blog\popular-post\post4.jpg" />
+    <Content Include="Content\img\blog\post-img1.jpg" />
+    <Content Include="Content\img\blog\post-img2.jpg" />
+    <Content Include="Content\img\blog\prev.jpg" />
+    <Content Include="Content\img\brand\1.png" />
+    <Content Include="Content\img\brand\2.png" />
+    <Content Include="Content\img\brand\3.png" />
+    <Content Include="Content\img\brand\4.png" />
+    <Content Include="Content\img\brand\5.png" />
+    <Content Include="Content\img\elements\a.jpg" />
+    <Content Include="Content\img\elements\a2.jpg" />
+    <Content Include="Content\img\elements\d.jpg" />
+    <Content Include="Content\img\elements\disabled-check.png" />
+    <Content Include="Content\img\elements\disabled-radio.png" />
+    <Content Include="Content\img\elements\f1.jpg" />
+    <Content Include="Content\img\elements\f2.jpg" />
+    <Content Include="Content\img\elements\f3.jpg" />
+    <Content Include="Content\img\elements\f4.jpg" />
+    <Content Include="Content\img\elements\f5.jpg" />
+    <Content Include="Content\img\elements\f6.jpg" />
+    <Content Include="Content\img\elements\f7.jpg" />
+    <Content Include="Content\img\elements\f8.jpg" />
+    <Content Include="Content\img\elements\g1.jpg" />
+    <Content Include="Content\img\elements\g2.jpg" />
+    <Content Include="Content\img\elements\g3.jpg" />
+    <Content Include="Content\img\elements\g4.jpg" />
+    <Content Include="Content\img\elements\g5.jpg" />
+    <Content Include="Content\img\elements\g6.jpg" />
+    <Content Include="Content\img\elements\g7.jpg" />
+    <Content Include="Content\img\elements\g8.jpg" />
+    <Content Include="Content\img\elements\primary-check.png" />
+    <Content Include="Content\img\elements\primary-radio.png" />
+    <Content Include="Content\img\elements\success-check.png" />
+    <Content Include="Content\img\elements\success-radio.png" />
+    <Content Include="Content\img\elements\tes1.jpg" />
+    <Content Include="Content\img\elements\tex2.jpg" />
+    <Content Include="Content\img\elements\user1.png" />
+    <Content Include="Content\img\elements\user2.png" />
+    <Content Include="Content\img\favicon.png" />
+    <Content Include="Content\img\icon\cotation.png" />
+    <Content Include="Content\img\icon\i1.png" />
+    <Content Include="Content\img\icon\i2.png" />
+    <Content Include="Content\img\icon\i3.png" />
+    <Content Include="Content\img\icon\i4.png" />
+    <Content Include="Content\img\icon\video-icon-1.png" />
+    <Content Include="Content\img\instagram\widget-i1.png" />
+    <Content Include="Content\img\instagram\widget-i2.png" />
+    <Content Include="Content\img\instagram\widget-i3.png" />
+    <Content Include="Content\img\instagram\widget-i4.png" />
+    <Content Include="Content\img\instagram\widget-i5.png" />
+    <Content Include="Content\img\instagram\widget-i6.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\notify-bg.jpg" />
+    <Content Include="Content\img\project\1.jpg" />
+    <Content Include="Content\img\project\2.jpg" />
+    <Content Include="Content\img\project\3.jpg" />
+    <Content Include="Content\img\project\4.jpg" />
+    <Content Include="Content\img\team\1.jpg" />
+    <Content Include="Content\img\team\2.jpg" />
+    <Content Include="Content\img\team\3.jpg" />
+    <Content Include="Content\img\video-1.jpg" />
+    <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\contact.js" />
+    <Content Include="Content\js\custom.js" />
+    <Content Include="Content\js\gmaps.min.js" />
+    <Content Include="Content\js\jquery-2.2.4.min.js" />
+    <Content Include="Content\js\jquery-3.3.1.min.js" />
+    <Content Include="Content\js\jquery.ajaxchimp.min.js" />
+    <Content Include="Content\js\jquery.form.js" />
+    <Content Include="Content\js\jquery.validate.min.js" />
+    <Content Include="Content\js\jquery.waypoints.min.js" />
+    <Content Include="Content\js\mail-script.js" />
+    <Content Include="Content\js\popper.js" />
+    <Content Include="Content\js\stellar.js" />
+    <Content Include="Content\js\theme.js" />
+    <Content Include="Content\js\waypoints.min.js" />
+    <Content Include="Content\my-icons-collection\backup.txt" />
+    <Content Include="Content\my-icons-collection\font\flaticon.css" />
+    <Content Include="Content\my-icons-collection\font\flaticon.html" />
+    <Content Include="Content\my-icons-collection\font\Flaticon.svg" />
+    <Content Include="Content\vendors\animate-css\animate.css" />
+    <Content Include="Content\vendors\animate-css\wow.min.js" />
+    <Content Include="Content\vendors\bootstrap-datepicker\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\vendors\bootstrap-datepicker\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\vendors\bootstrap-datepicker\bootstrap-select.css" />
+    <Content Include="Content\vendors\bootstrap-datepicker\bootstrap-select.js" />
+    <Content Include="Content\vendors\fontawesome\css\all.min.css" />
+    <Content Include="Content\vendors\owl-carousel\assets\ajax-loader.gif" />
+    <Content Include="Content\vendors\owl-carousel\assets\animated.css" />
+    <Content Include="Content\vendors\owl-carousel\assets\owl.carousel.css" />
+    <Content Include="Content\vendors\owl-carousel\owl.carousel.min.css" />
+    <Content Include="Content\vendors\owl-carousel\owl.carousel.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Content\css\breadcrumb.css.map" />
+    <Content Include="Content\css\style.css.map" />
+    <Content Include="Content\css\_about.css.map" />
+    <Content Include="Content\css\_courses.css.map" />
+    <Content Include="Content\css\_feature.css.map" />
+    <Content Include="Content\css\_price.css.map" />
+    <Content Include="Content\fonts\Flaticon.eot" />
+    <Content Include="Content\fonts\Flaticon.ttf" />
+    <Content Include="Content\fonts\Flaticon.woff" />
+    <Content Include="Content\fonts\Flaticon.woff2" />
+    <Content Include="Content\fonts\themify.eot" />
+    <Content Include="Content\fonts\themify.ttf" />
+    <Content Include="Content\fonts\themify.woff" />
+    <Content Include="Content\img\.DS_Store" />
+    <Content Include="Content\img\blog\.DS_Store" />
+    <Content Include="Content\img\elements\_DS_Store" />
+    <Content Include="Content\my-icons-collection\font\Flaticon.eot" />
+    <Content Include="Content\my-icons-collection\font\Flaticon.ttf" />
+    <Content Include="Content\my-icons-collection\font\Flaticon.woff" />
+    <Content Include="Content\my-icons-collection\font\Flaticon.woff2" />
+    <Content Include="Content\my-icons-collection\font\_flaticon.scss" />
+    <Content Include="Content\my-icons-collection\license\license.pdf" />
+    <Content Include="Content\scss\style.scss" />
+    <Content Include="Content\scss\_about.scss" />
+    <Content Include="Content\scss\_appointment.scss" />
+    <Content Include="Content\scss\_blog.scss" />
+    <Content Include="Content\scss\_breadcrumb.scss" />
+    <Content Include="Content\scss\_button.scss" />
+    <Content Include="Content\scss\_contact.scss" />
+    <Content Include="Content\scss\_elements.scss" />
+    <Content Include="Content\scss\_footer.scss" />
+    <Content Include="Content\scss\_header.scss" />
+    <Content Include="Content\scss\_hotline.scss" />
+    <Content Include="Content\scss\_predefine.scss" />
+    <Content Include="Content\scss\_services.scss" />
+    <Content Include="Content\scss\_team.scss" />
+    <Content Include="Content\scss\_testimonials.scss" />
+    <Content Include="Content\scss\_variables.scss" />
+    <Content Include="Content\vendors\.DS_Store" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\vendors\fontawesome\webfonts\fa-solid-900.woff2" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config" />
+    <Content Include="Views\Medicos\Create.cshtml" />
+    <Content Include="Views\Medicos\Delete.cshtml" />
+    <Content Include="Views\Medicos\Details.cshtml" />
+    <Content Include="Views\Medicos\Edit.cshtml" />
+    <Content Include="Views\Medicos\Index.cshtml" />
+    <Content Include="Views\Pacientes\Create.cshtml" />
+    <Content Include="Views\Pacientes\Delete.cshtml" />
+    <Content Include="Views\Pacientes\Details.cshtml" />
+    <Content Include="Views\Pacientes\Edit.cshtml" />
+    <Content Include="Views\Pacientes\Index.cshtml" />
+    <Content Include="Views\Pacientes\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\Habitaciones\Create.cshtml" />
+    <Content Include="Views\Habitaciones\Delete.cshtml" />
+    <Content Include="Views\Habitaciones\Details.cshtml" />
+    <Content Include="Views\Habitaciones\Edit.cshtml" />
+    <Content Include="Views\Habitaciones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\InicioController.cs" />
+    <Compile Include="Controllers\Modulo Procesos\AltasController.cs" />
+    <Compile Include="Controllers\Modulo Procesos\CitasController.cs" />
+    <Compile Include="Controllers\Modulo Mantenimiento\HabitacionesController.cs" />
+    <Compile Include="Controllers\Modulo Mantenimiento\MedicosController.cs" />
+    <Compile Include="Controllers\Modulo Mantenimiento\PacientesController.cs" />
+    <Compile Include="Controllers\Modulo Procesos\IngresosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003302031245_PrimeraMigracion.cs" />
+    <Compile Include="Migrations\202003302031245_PrimeraMigracion.Designer.cs">
+      <DependentUpon>202003302031245_PrimeraMigracion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003302043168_SegundaMigracion.cs" />
+    <Compile Include="Migrations\202003302043168_SegundaMigracion.Designer.cs">
+      <DependentUpon>202003302043168_SegundaMigracion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003312134014_TerceraMigracion.cs" />
+    <Compile Include="Migrations\202003312134014_TerceraMigracion.Designer.cs">
+      <DependentUpon>202003312134014_TerceraMigracion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004012332187_DatetimeMigration.cs" />
+    <Compile Include="Migrations\202004012332187_DatetimeMigration.Designer.cs">
+      <DependentUpon>202004012332187_DatetimeMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004012350023_DatetimeMigration2.cs" />
+    <Compile Include="Migrations\202004012350023_DatetimeMigration2.Designer.cs">
+      <DependentUpon>202004012350023_DatetimeMigration2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004030021479_Ejemplo.cs" />
+    <Compile Include="Migrations\202004030021479_Ejemplo.Designer.cs">
+      <DependentUpon>202004030021479_Ejemplo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004032256189_CambiandoDatos.cs" />
+    <Compile Include="Migrations\202004032256189_CambiandoDatos.Designer.cs">
+      <DependentUpon>202004032256189_CambiandoDatos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004032258085_CambiandoDatoss.cs" />
+    <Compile Include="Migrations\202004032258085_CambiandoDatoss.Designer.cs">
+      <DependentUpon>202004032258085_CambiandoDatoss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004032329552_Prueba.cs" />
+    <Compile Include="Migrations\202004032329552_Prueba.Designer.cs">
+      <DependentUpon>202004032329552_Prueba.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004050649019_Validacion.cs" />
+    <Compile Include="Migrations\202004050649019_Validacion.Designer.cs">
+      <DependentUpon>202004050649019_Validacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Altas.cs" />
+    <Compile Include="Models\Citas.cs" />
+    <Compile Include="Models\Habitaciones.cs" />
+    <Compile Include="Models\Ingresos.cs" />
+    <Compile Include="Models\Medicos.cs" />
+    <Compile Include="Models\Pacientes.cs" />
+    <Compile Include="Models\SistemaMedicoDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Ingresos\Create.cshtml" />
+    <Content Include="Views\Ingresos\Delete.cshtml" />
+    <Content Include="Views\Ingresos\Details.cshtml" />
+    <Content Include="Views\Ingresos\Edit.cshtml" />
+    <Content Include="Views\Ingresos\Index.cshtml" />
+    <Content Include="Views\Citas\Create.cshtml" />
+    <Content Include="Views\Citas\Delete.cshtml" />
+    <Content Include="Views\Citas\Details.cshtml" />
+    <Content Include="Views\Citas\Edit.cshtml" />
+    <Content Include="Views\Citas\Index.cshtml" />
+    <Content Include="Views\Altas\Create.cshtml" />
+    <Content Include="Views\Altas\Delete.cshtml" />
+    <Content Include="Views\Altas\Details.cshtml" />
+    <Content Include="Views\Altas\Index.cshtml" />
+    <Content Include="Views\Altas\Edit.cshtml" />
+    <Content Include="Views\Inicio\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -110,8 +437,38 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003302031245_PrimeraMigracion.resx">
+      <DependentUpon>202003302031245_PrimeraMigracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003302043168_SegundaMigracion.resx">
+      <DependentUpon>202003302043168_SegundaMigracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003312134014_TerceraMigracion.resx">
+      <DependentUpon>202003312134014_TerceraMigracion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004012332187_DatetimeMigration.resx">
+      <DependentUpon>202004012332187_DatetimeMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004012350023_DatetimeMigration2.resx">
+      <DependentUpon>202004012350023_DatetimeMigration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004030021479_Ejemplo.resx">
+      <DependentUpon>202004030021479_Ejemplo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004032256189_CambiandoDatos.resx">
+      <DependentUpon>202004032256189_CambiandoDatos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004032258085_CambiandoDatoss.resx">
+      <DependentUpon>202004032258085_CambiandoDatoss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004032329552_Prueba.resx">
+      <DependentUpon>202004032329552_Prueba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004050649019_Validacion.resx">
+      <DependentUpon>202004050649019_Validacion.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

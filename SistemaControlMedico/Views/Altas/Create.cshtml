@@ -1,0 +1,136 @@
+﻿@model SistemaControlMedico.Models.Altas
+
+@{
+    ViewBag.Title = "Registrar Altas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div>
+        <h3>Registrar Altas</h3>
+        @using (Html.BeginForm())
+        {
+
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ingreso, "ID Ingreso", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(Model => Model.ingreso, ViewBag.ingreso as SelectList, "Seleccione el ID del Ingreso", htmlAttributes: new { onChange = "TextoSeleccionado(this.value);", @id = "opciones", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ingreso, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nombreP, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.nombreP, new { htmlAttributes = new { @id = "nombreP", @readonly = "readonly", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.nombreP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cedulaP, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.cedulaP, new { htmlAttributes = new { @id = "cedulaP", @readonly = "readonly", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.cedulaP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nombreM, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.nombreM, new { htmlAttributes = new { @id = "nombreM", @readonly = "readonly", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.nombreM, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tipoH, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.tipoH, new { htmlAttributes = new { @id = "tipoH", @readonly = "readonly", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.tipoH, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fechaI, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.fechaI, new { htmlAttributes = new { @id = "fechaI", @readonly = "readonly", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fechaI, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.fechaSalida, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.fechaSalida, new { htmlAttributes = new { @id = "fechaSalida", @type = "date", @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fechaSalida, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="REGISTRAR ALTA" class="btn btn-primary" />
+                        @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-primary" })
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    function TextoSeleccionado(code) {
+        $.ajax({
+            url: '@Url.Action("ObtenerRegistros","Altas")',
+            type: 'POST',
+            data: { "code": code },
+            success: function (data) {
+               
+                if (data != null) {
+                    let Nombre = "";
+                    let fecha = "";
+                    let tipoo = "";
+                    let cedula = "";
+                    let medico = "";
+
+                    for (let i = 0; i < data.length; i++) {
+                       
+                        Nombre += data[i].nom;
+                        fecha += data[i].fe;
+                        tipoo += data[i].hab;
+                        cedula += data[i].ced;
+                        medico += data[i].med;
+                    }
+
+                    var dateString = fecha.substr(6);
+                    var currentTime = new Date(parseInt(dateString));
+                    var month = currentTime.getMonth() + 1;
+                    var day = currentTime.getDate();
+                    var year = currentTime.getFullYear();
+                    var date = day + "/" + month + "/" + year;
+
+
+                    $("#nombreP").val(Nombre);
+                    $("#fechaI").val(date);
+                    $("#tipoH").val(tipoo);
+                    $("#cedulaP").val(cedula);
+                    $("#nombreM").val(medico);
+
+                    
+
+                }
+            }
+        });
+    }
+</script>

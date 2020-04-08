@@ -1,0 +1,78 @@
+﻿@model SistemaControlMedico.Models.Altas
+
+@{
+    ViewBag.Title = "Informacion Altas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <div>
+        <h3>Detalles Altas</h3>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.idAlta)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.idAlta)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Ingresos.idIngreso)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ingresos.idIngreso)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.nombreP)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ingresos.Pacientes.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Ingresos.Pacientes.cedula)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ingresos.Pacientes.cedula)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.nombreM)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ingresos.Medicos.nombre)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.fechaI)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Ingresos.fechaIngreso)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fechaSalida)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fechaSalida)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.monto)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.monto)
+            </dd>
+
+        </dl>
+    </div>
+    <hr>
+    
+</div>
+<p>
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.idAlta }, new { @class="btn btn-primary"}) 
+    @Html.ActionLink("Volver", "Index",null,new { @class="btn btn-primary"})
+</p>

@@ -1,0 +1,49 @@
+﻿@model SistemaControlMedico.Models.Pacientes
+
+@{
+    ViewBag.Title = "Informacion Pacientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <div>
+        <h4>Detalles Pacientes</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.cedula)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.cedula)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nombre)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.asegurado)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.asegurado)
+            </dd>
+
+        </dl>
+    </div>
+    <hr>
+    <div>
+        <p>
+            @Html.ActionLink("Modificar", "Edit", new { id = Model.idPaciente }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Volver", "Index", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>
+
+
